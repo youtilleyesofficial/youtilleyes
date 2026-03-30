@@ -71,7 +71,7 @@ echo "Configuring Nginx..."
 sudo tee /etc/nginx/sites-available/youtilleyes > /dev/null << 'NGINX'
 server {
     listen 80;
-    server_name 13.126.9.89 _;
+    server_name youtilleyes.com www.youtilleyes.com 13.126.9.89;
 
     root /home/ubuntu/youtilleyes/artifacts/youtilleyes/dist;
     index index.html;
