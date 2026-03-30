@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "YouTillEyes"
+version = "1.0.0"
+id = "artifacts/youtilleyes"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19208
+
+[services.development]
+run = "pnpm --filter @workspace/youtilleyes run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/youtilleyes", "run", "build" ]
+publicDir = "artifacts/youtilleyes/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19208"
+BASE_PATH = "/"

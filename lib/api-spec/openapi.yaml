@@ -1,15 +1,28 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: YouTillEyes Marketplace Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication operations
+  - name: users
+    description: User management
+  - name: projects
+    description: Project management
+  - name: bids
+    description: Bid management
+  - name: submissions
+    description: Submission management
+  - name: admin
+    description: Admin operations
+  - name: dashboard
+    description: Dashboard summaries
 paths:
   /healthz:
     get:
@@ -24,6 +37,592 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout user
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /users:
+    get:
+      operationId: getUsers
+      tags: [users]
+      summary: Get all users (admin only)
+      parameters:
+        - in: query
+          name: role
+          schema:
+            type: string
+            enum: [ADMIN, CLIENT, USER]
+        - in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+  /users/{id}:
+    get:
+      operationId: getUserById
+      tags: [users]
+      summary: Get user by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /projects:
+    get:
+      operationId: getProjects
+      tags: [projects]
+      summary: Get all projects
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [Open, Assigned, In-Progress, Submitted, Completed]
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+    post:
+      operationId: createProject
+      tags: [projects]
+      summary: Create a new project (client only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProjectRequest"
+      responses:
+        "201":
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /projects/{id}:
+    get:
+      operationId: getProjectById
+      tags: [projects]
+      summary: Get project by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectDetail"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      operationId: updateProject
+      tags: [projects]
+      summary: Update project
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProjectRequest"
+      responses:
+        "200":
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    delete:
+      operationId: deleteProject
+      tags: [projects]
+      summary: Delete project
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /projects/{id}/assign:
+    post:
+      operationId: assignProject
+      tags: [projects]
+      summary: Assign project to user (admin only)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignProjectRequest"
+      responses:
+        "200":
+          description: Project assigned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /projects/client/mine:
+    get:
+      operationId: getClientProjects
+      tags: [projects]
+      summary: Get projects for current client
+      responses:
+        "200":
+          description: Client's projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /projects/user/assigned:
+    get:
+      operationId: getUserAssignedProjects
+      tags: [projects]
+      summary: Get projects assigned to current user
+      responses:
+        "200":
+          description: User's assigned projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /bids:
+    get:
+      operationId: getBids
+      tags: [bids]
+      summary: Get all bids (admin only)
+      parameters:
+        - in: query
+          name: projectId
+          schema:
+            type: integer
+        - in: query
+          name: userId
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of bids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bid"
+    post:
+      operationId: createBid
+      tags: [bids]
+      summary: Submit a bid on a project (user only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBidRequest"
+      responses:
+        "201":
+          description: Bid submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bid"
+
+  /bids/{id}:
+    get:
+      operationId: getBidById
+      tags: [bids]
+      summary: Get bid by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Bid details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bid"
+    delete:
+      operationId: deleteBid
+      tags: [bids]
+      summary: Delete bid
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Bid deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /bids/user/mine:
+    get:
+      operationId: getUserBids
+      tags: [bids]
+      summary: Get current user's bids
+      responses:
+        "200":
+          description: User's bids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bid"
+
+  /bids/project/{projectId}:
+    get:
+      operationId: getBidsByProject
+      tags: [bids]
+      summary: Get all bids for a project
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project bids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bid"
+
+  /submissions:
+    get:
+      operationId: getSubmissions
+      tags: [submissions]
+      summary: Get all submissions (admin only)
+      parameters:
+        - in: query
+          name: projectId
+          schema:
+            type: integer
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [Pending, Approved, Forwarded, Rejected]
+      responses:
+        "200":
+          description: List of submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Submission"
+    post:
+      operationId: createSubmission
+      tags: [submissions]
+      summary: Submit work for a project (user only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSubmissionRequest"
+      responses:
+        "201":
+          description: Submission created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Submission"
+
+  /submissions/{id}:
+    get:
+      operationId: getSubmissionById
+      tags: [submissions]
+      summary: Get submission by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Submission details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Submission"
+    put:
+      operationId: updateSubmission
+      tags: [submissions]
+      summary: Update submission status (admin only)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSubmissionRequest"
+      responses:
+        "200":
+          description: Submission updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Submission"
+
+  /submissions/user/mine:
+    get:
+      operationId: getUserSubmissions
+      tags: [submissions]
+      summary: Get current user's submissions
+      responses:
+        "200":
+          description: User's submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Submission"
+
+  /submissions/project/{projectId}:
+    get:
+      operationId: getSubmissionsByProject
+      tags: [submissions]
+      summary: Get all submissions for a project
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Submission"
+
+  /dashboard/admin:
+    get:
+      operationId: getAdminDashboard
+      tags: [dashboard]
+      summary: Admin dashboard summary
+      responses:
+        "200":
+          description: Admin dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminDashboard"
+
+  /dashboard/client:
+    get:
+      operationId: getClientDashboard
+      tags: [dashboard]
+      summary: Client dashboard summary
+      responses:
+        "200":
+          description: Client dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientDashboard"
+
+  /dashboard/user:
+    get:
+      operationId: getUserDashboard
+      tags: [dashboard]
+      summary: User dashboard summary
+      responses:
+        "200":
+          description: User dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDashboard"
+
+  /dashboard/activity:
+    get:
+      operationId: getRecentActivity
+      tags: [dashboard]
+      summary: Recent platform activity feed
+      responses:
+        "200":
+          description: Activity list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityItem"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +633,481 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - email
+        - password
+
+    RegisterRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        role:
+          type: string
+          enum: [CLIENT, USER]
+        phone:
+          type: string
+        bio:
+          type: string
+        skills:
+          type: string
+      required:
+        - name
+        - email
+        - password
+        - role
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+      required:
+        - user
+        - token
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [ADMIN, CLIENT, USER]
+        phone:
+          type: string
+          nullable: true
+        bio:
+          type: string
+          nullable: true
+        skills:
+          type: string
+          nullable: true
+        avatarUrl:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - email
+        - role
+        - isActive
+        - createdAt
+
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          nullable: true
+        budget:
+          type: number
+          nullable: true
+        deadline:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          enum: [Open, Assigned, In-Progress, Submitted, Completed]
+        clientId:
+          type: integer
+        assignedUserId:
+          type: integer
+          nullable: true
+        client:
+          $ref: "#/components/schemas/User"
+          nullable: true
+        assignedUser:
+          $ref: "#/components/schemas/User"
+          nullable: true
+        bidCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - title
+        - description
+        - status
+        - clientId
+        - bidCount
+        - createdAt
+        - updatedAt
+
+    ProjectDetail:
+      allOf:
+        - $ref: "#/components/schemas/Project"
+        - type: object
+          properties:
+            bids:
+              type: array
+              items:
+                $ref: "#/components/schemas/Bid"
+            submissions:
+              type: array
+              items:
+                $ref: "#/components/schemas/Submission"
+
+    CreateProjectRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        budget:
+          type: number
+        deadline:
+          type: string
+          format: date-time
+      required:
+        - title
+        - description
+
+    UpdateProjectRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        budget:
+          type: number
+        deadline:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [Open, Assigned, In-Progress, Submitted, Completed]
+
+    AssignProjectRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+      required:
+        - userId
+
+    Bid:
+      type: object
+      properties:
+        id:
+          type: integer
+        projectId:
+          type: integer
+        userId:
+          type: integer
+        amount:
+          type: number
+        proposal:
+          type: string
+          nullable: true
+        timeline:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [Pending, Accepted, Rejected]
+        project:
+          $ref: "#/components/schemas/Project"
+          nullable: true
+        user:
+          $ref: "#/components/schemas/User"
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - projectId
+        - userId
+        - amount
+        - status
+        - createdAt
+
+    CreateBidRequest:
+      type: object
+      properties:
+        projectId:
+          type: integer
+        amount:
+          type: number
+        proposal:
+          type: string
+        timeline:
+          type: string
+      required:
+        - projectId
+        - amount
+
+    Submission:
+      type: object
+      properties:
+        id:
+          type: integer
+        projectId:
+          type: integer
+        userId:
+          type: integer
+        fileUrl:
+          type: string
+        fileDescription:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [Pending, Approved, Forwarded, Rejected]
+        adminNotes:
+          type: string
+          nullable: true
+        project:
+          $ref: "#/components/schemas/Project"
+          nullable: true
+        user:
+          $ref: "#/components/schemas/User"
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - projectId
+        - userId
+        - fileUrl
+        - status
+        - createdAt
+        - updatedAt
+
+    CreateSubmissionRequest:
+      type: object
+      properties:
+        projectId:
+          type: integer
+        fileUrl:
+          type: string
+        fileDescription:
+          type: string
+        notes:
+          type: string
+      required:
+        - projectId
+        - fileUrl
+
+    UpdateSubmissionRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [Pending, Approved, Forwarded, Rejected]
+        adminNotes:
+          type: string
+
+    AdminDashboard:
+      type: object
+      properties:
+        totalUsers:
+          type: integer
+        totalClients:
+          type: integer
+        totalWorkers:
+          type: integer
+        totalProjects:
+          type: integer
+        openProjects:
+          type: integer
+        assignedProjects:
+          type: integer
+        inProgressProjects:
+          type: integer
+        completedProjects:
+          type: integer
+        totalBids:
+          type: integer
+        pendingSubmissions:
+          type: integer
+        projectsByCategory:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryCount"
+        recentProjects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+      required:
+        - totalUsers
+        - totalClients
+        - totalWorkers
+        - totalProjects
+        - openProjects
+        - assignedProjects
+        - inProgressProjects
+        - completedProjects
+        - totalBids
+        - pendingSubmissions
+        - projectsByCategory
+        - recentProjects
+
+    ClientDashboard:
+      type: object
+      properties:
+        totalProjects:
+          type: integer
+        openProjects:
+          type: integer
+        inProgressProjects:
+          type: integer
+        completedProjects:
+          type: integer
+        totalBidsReceived:
+          type: integer
+        recentProjects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+        recentSubmissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Submission"
+      required:
+        - totalProjects
+        - openProjects
+        - inProgressProjects
+        - completedProjects
+        - totalBidsReceived
+        - recentProjects
+        - recentSubmissions
+
+    UserDashboard:
+      type: object
+      properties:
+        totalBids:
+          type: integer
+        acceptedBids:
+          type: integer
+        pendingBids:
+          type: integer
+        activeProjects:
+          type: integer
+        totalSubmissions:
+          type: integer
+        approvedSubmissions:
+          type: integer
+        availableProjects:
+          type: integer
+        recentBids:
+          type: array
+          items:
+            $ref: "#/components/schemas/Bid"
+        assignedProjects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+      required:
+        - totalBids
+        - acceptedBids
+        - pendingBids
+        - activeProjects
+        - totalSubmissions
+        - approvedSubmissions
+        - availableProjects
+        - recentBids
+        - assignedProjects
+
+    ActivityItem:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [project_created, bid_submitted, project_assigned, submission_uploaded, project_completed]
+        message:
+          type: string
+        userName:
+          type: string
+          nullable: true
+        projectTitle:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - type
+        - message
+        - createdAt
+
+    CategoryCount:
+      type: object
+      properties:
+        category:
+          type: string
+        count:
+          type: integer
+      required:
+        - category
+        - count
