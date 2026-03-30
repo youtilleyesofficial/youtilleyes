@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Briefcase, AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2, X } from "lucide-react";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
 
 const loginSchema = z.object({
@@ -59,7 +59,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center gap-3">
           <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />
@@ -67,8 +67,13 @@ export default function Login() {
         </Link>
       </div>
 
-      <Card className="w-full max-w-md shadow-lg border-0 ring-1 ring-slate-200">
-        <CardHeader className="space-y-1 text-center pb-6">
+      <Card className="w-full max-w-md shadow-lg border-0 ring-1 ring-slate-200 relative">
+        <Link href="/">
+          <button className="absolute top-4 right-4 h-8 w-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-slate-100 hover:text-foreground transition-colors z-10">
+            <X className="h-5 w-5" />
+          </button>
+        </Link>
+        <CardHeader className="space-y-1 text-center pb-6 pt-8">
           <CardTitle className="text-2xl font-bold tracking-tight">Welcome back</CardTitle>
           <CardDescription>
             Enter your credentials to access your account

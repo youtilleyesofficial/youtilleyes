@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2, X } from "lucide-react";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
 
 const registerSchema = z.object({
@@ -69,7 +69,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-4 py-12">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 py-12">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center gap-3">
           <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />
@@ -77,8 +77,13 @@ export default function Register() {
         </Link>
       </div>
 
-      <Card className="w-full max-w-xl shadow-lg border-0 ring-1 ring-slate-200">
-        <CardHeader className="space-y-1 text-center pb-6">
+      <Card className="w-full max-w-xl shadow-lg border-0 ring-1 ring-slate-200 relative">
+        <Link href="/">
+          <button className="absolute top-4 right-4 h-8 w-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-slate-100 hover:text-foreground transition-colors z-10">
+            <X className="h-5 w-5" />
+          </button>
+        </Link>
+        <CardHeader className="space-y-1 text-center pb-6 pt-8">
           <CardTitle className="text-2xl font-bold tracking-tight">Create an account</CardTitle>
           <CardDescription>
             Join the premium marketplace for professionals
