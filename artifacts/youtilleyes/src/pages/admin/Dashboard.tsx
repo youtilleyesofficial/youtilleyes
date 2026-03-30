@@ -31,103 +31,103 @@ export default function AdminDashboard() {
   }));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full min-w-0 overflow-x-hidden">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Platform Overview</h1>
-        <p className="text-muted-foreground mt-1">Global statistics and recent activity across YouTillEyes.</p>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">Platform Overview</h1>
+        <p className="text-muted-foreground mt-1 text-sm">Global statistics and recent activity across YouTillEyes.</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-white">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-primary" />
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+        <Card className="bg-white overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between pb-1 px-3 pt-3">
+            <CardTitle className="text-xs font-medium text-slate-600 leading-tight">Total Users</CardTitle>
+            <Users className="h-3.5 w-3.5 text-primary shrink-0" />
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-slate-900">{dashboard.totalUsers}</div>
-            <p className="text-xs text-muted-foreground mt-1">
+          <CardContent className="px-3 pb-3">
+            <div className="text-2xl font-bold text-slate-900">{dashboard.totalUsers}</div>
+            <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
               <span className="font-medium text-slate-700">{dashboard.totalClients}</span> Clients · <span className="font-medium text-slate-700">{dashboard.totalWorkers}</span> Talent
             </p>
           </CardContent>
         </Card>
         
-        <Card className="bg-white">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Total Projects</CardTitle>
-            <Briefcase className="h-4 w-4 text-blue-500" />
+        <Card className="bg-white overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between pb-1 px-3 pt-3">
+            <CardTitle className="text-xs font-medium text-slate-600 leading-tight">Total Projects</CardTitle>
+            <Briefcase className="h-3.5 w-3.5 text-blue-500 shrink-0" />
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-slate-900">{dashboard.totalProjects}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              <span className="font-medium text-emerald-600">{dashboard.openProjects} Open</span> · <span className="font-medium text-slate-700">{dashboard.completedProjects} Completed</span>
+          <CardContent className="px-3 pb-3">
+            <div className="text-2xl font-bold text-slate-900">{dashboard.totalProjects}</div>
+            <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
+              <span className="font-medium text-emerald-600">{dashboard.openProjects} Open</span> · <span className="font-medium text-slate-700">{dashboard.completedProjects} Done</span>
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-white">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Active Bids</CardTitle>
-            <FileText className="h-4 w-4 text-amber-500" />
+        <Card className="bg-white overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between pb-1 px-3 pt-3">
+            <CardTitle className="text-xs font-medium text-slate-600 leading-tight">Active Bids</CardTitle>
+            <FileText className="h-3.5 w-3.5 text-amber-500 shrink-0" />
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-slate-900">{dashboard.totalBids}</div>
-            <p className="text-xs text-muted-foreground mt-1">Across all open projects</p>
+          <CardContent className="px-3 pb-3">
+            <div className="text-2xl font-bold text-slate-900">{dashboard.totalBids}</div>
+            <p className="text-[10px] text-muted-foreground mt-0.5">All open projects</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-white border-purple-200">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-purple-700">Pending Reviews</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-purple-600" />
+        <Card className="bg-white border-purple-200 overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between pb-1 px-3 pt-3">
+            <CardTitle className="text-xs font-medium text-purple-700 leading-tight">Pending Reviews</CardTitle>
+            <CheckCircle2 className="h-3.5 w-3.5 text-purple-600 shrink-0" />
           </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-purple-700">{dashboard.pendingSubmissions}</div>
-            <p className="text-xs text-purple-600/80 mt-1">Submissions require admin review</p>
+          <CardContent className="px-3 pb-3">
+            <div className="text-2xl font-bold text-purple-700">{dashboard.pendingSubmissions}</div>
+            <p className="text-[10px] text-purple-600/80 mt-0.5 leading-tight">Need admin review</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Projects by Category</CardTitle>
-            <CardDescription>Distribution of active and completed projects</CardDescription>
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <Card className="md:col-span-2 min-w-0 overflow-hidden">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base">Projects by Category</CardTitle>
+            <CardDescription className="text-xs">Distribution of active and completed projects</CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px]">
+          <CardContent className="h-[220px] md:h-[300px] p-2 md:p-6">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <BarChart data={chartData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} />
                 <Tooltip 
                   cursor={{ fill: '#f1f5f9' }}
-                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: 12 }}
                 />
-                <Bar dataKey="total" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} maxBarSize={50} />
+                <Bar dataKey="total" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} maxBarSize={40} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        <Card className="flex flex-col">
-          <CardHeader>
+        <Card className="flex flex-col min-w-0 overflow-hidden">
+          <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
-              <CardTitle>Activity Feed</CardTitle>
+              <CardTitle className="text-base">Activity Feed</CardTitle>
               <Activity className="h-4 w-4 text-muted-foreground" />
             </div>
-            <CardDescription>Latest platform events</CardDescription>
+            <CardDescription className="text-xs">Latest platform events</CardDescription>
           </CardHeader>
-          <CardContent className="flex-1 overflow-auto">
-            <div className="space-y-4 pr-2">
+          <CardContent className="flex-1 overflow-auto max-h-[300px]">
+            <div className="space-y-3">
               {activity?.map((item) => (
-                <div key={item.id} className="flex gap-3 text-sm">
-                  <div className="mt-0.5 h-2 w-2 rounded-full bg-primary shrink-0" />
-                  <div className="space-y-1">
-                    <p className="text-slate-800">
+                <div key={item.id} className="flex gap-2 text-sm">
+                  <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                  <div className="space-y-0.5 min-w-0">
+                    <p className="text-slate-800 text-xs leading-snug break-words">
                       <span className="font-semibold">{item.userName}</span> {item.message}
                       {item.projectTitle && <span className="font-medium italic text-slate-700"> "{item.projectTitle}"</span>}
                     </p>
-                    <p className="text-xs text-muted-foreground">{new Date(item.createdAt).toLocaleString()}</p>
+                    <p className="text-[10px] text-muted-foreground">{new Date(item.createdAt).toLocaleString()}</p>
                   </div>
                 </div>
               ))}

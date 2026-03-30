@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useLogout } from "@workspace/api-client-react";
@@ -8,6 +8,8 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
+
+const AVATAR_KEY = "youtilleyes_avatar";
 
 interface NavItem {
   title: string;
@@ -31,6 +33,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, logout: clearAuth } = useAuth();
   const [location] = useLocation();
   const logoutMutation = useLogout();
+  const [avatarSrc] = useState<string | null>(() => localStorage.getItem(AVATAR_KEY));
 
   const handleLogout = () => {
     logoutMutation.mutate(undefined, { onSuccess: () => clearAuth() });
@@ -103,9 +106,13 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               "hover:bg-sidebar-accent/60 border border-sidebar-border/40 hover:border-sidebar-accent",
               location === "/profile" ? "bg-sidebar-accent/80 border-sidebar-accent" : "bg-sidebar-accent/20"
             )}>
-              <div className={cn("h-10 w-10 rounded-full flex items-center justify-center font-bold text-white text-base shrink-0 shadow-sm", avatarBg)}>
-                {user?.name.charAt(0).toUpperCase()}
-              </div>
+              {avatarSrc ? (
+                <img src={avatarSrc} alt="avatar" className="h-10 w-10 rounded-full object-cover shrink-0 shadow-sm ring-2 ring-sidebar-border" />
+              ) : (
+                <div className={cn("h-10 w-10 rounded-full flex items-center justify-center font-bold text-white text-base shrink-0 shadow-sm", avatarBg)}>
+                  {user?.name.charAt(0).toUpperCase()}
+                </div>
+              )}
               <div className="flex flex-col overflow-hidden flex-1 min-w-0">
                 <span className="text-sm font-semibold truncate text-sidebar-foreground leading-tight">{user?.name}</span>
                 <Badge variant="outline" className={cn("mt-1 w-fit text-[10px] px-1.5 py-0 border font-semibold", roleBadgeClass)}>
@@ -163,6 +170,20 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 border-b bg-sidebar text-sidebar-foreground z-50 flex items-center justify-between px-4">
         <img src={logoImg} alt="Logo" className="h-8 w-auto" />
 
+        <div className="flex items-center gap-2">
+          {user && (
+            <Link href="/profile">
+              <div className="flex items-center gap-2 cursor-pointer">
+                {avatarSrc ? (
+                  <img src={avatarSrc} alt="avatar" className="h-8 w-8 rounded-full object-cover ring-2 ring-sidebar-border/60" />
+                ) : (
+                  <div className={cn("h-8 w-8 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0", avatarBg)}>
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                )}
+              </div>
+            </Link>
+          )}
         {extraMobileItems.length > 0 && (
           <Sheet>
             <SheetTrigger asChild>
@@ -177,9 +198,13 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
                 {/* Profile in mobile sheet too */}
                 <Link href="/profile">
                   <div className="flex items-center gap-3 rounded-xl px-3 py-3 mb-4 bg-sidebar-accent/20 border border-sidebar-border/40 cursor-pointer hover:bg-sidebar-accent/60 transition-all">
-                    <div className={cn("h-9 w-9 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0", avatarBg)}>
-                      {user?.name.charAt(0).toUpperCase()}
-                    </div>
+                    {avatarSrc ? (
+                      <img src={avatarSrc} alt="avatar" className="h-9 w-9 rounded-full object-cover shrink-0 ring-2 ring-sidebar-border" />
+                    ) : (
+                      <div className={cn("h-9 w-9 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0", avatarBg)}>
+                        {user?.name.charAt(0).toUpperCase()}
+                      </div>
+                    )}
                     <div className="flex flex-col overflow-hidden">
                       <span className="text-sm font-semibold truncate">{user?.name}</span>
                       <Badge variant="outline" className={cn("mt-0.5 w-fit text-[10px] px-1.5 py-0 border font-semibold", roleBadgeClass)}>
@@ -219,11 +244,12 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
             </SheetContent>
           </Sheet>
         )}
+        </div>
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col pt-16 md:pt-0 min-h-screen">
-        <div className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full pb-20 md:pb-8">
+      <main className="flex-1 flex flex-col pt-16 md:pt-0 min-h-screen overflow-x-hidden">
+        <div className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full min-w-0 pb-20 md:pb-8">
           {children}
         </div>
       </main>

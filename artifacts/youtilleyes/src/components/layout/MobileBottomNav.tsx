@@ -1,11 +1,15 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
-import { Home, Briefcase, FolderOpen, LogIn, LayoutDashboard, User } from "lucide-react";
+import { Home, Briefcase, FolderOpen, LogIn, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+
+const AVATAR_KEY = "youtilleyes_avatar";
 
 export function MobileBottomNav() {
   const { user } = useAuth();
   const [location] = useLocation();
+  const [avatarSrc] = useState<string | null>(() => localStorage.getItem(AVATAR_KEY));
 
   const dashboardHref = user?.role === "ADMIN"
     ? "/admin/dashboard"
@@ -104,12 +108,16 @@ export function MobileBottomNav() {
           isActive(profileHref) ? "text-primary" : "text-gray-400"
         )}>
           {user ? (
-            <div className={cn(
-              "h-6 w-6 rounded-full flex items-center justify-center text-white text-xs font-bold",
-              isActive(profileHref) ? "bg-primary" : "bg-gray-400"
-            )}>
-              {user.name.charAt(0).toUpperCase()}
-            </div>
+            avatarSrc ? (
+              <img src={avatarSrc} alt="avatar" className={cn("h-6 w-6 rounded-full object-cover ring-2", isActive(profileHref) ? "ring-primary" : "ring-gray-300")} />
+            ) : (
+              <div className={cn(
+                "h-6 w-6 rounded-full flex items-center justify-center text-white text-xs font-bold",
+                isActive(profileHref) ? "bg-primary" : "bg-gray-400"
+              )}>
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            )
           ) : (
             <LogIn className="h-5 w-5" />
           )}
