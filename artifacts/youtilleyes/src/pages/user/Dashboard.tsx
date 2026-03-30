@@ -34,14 +34,13 @@ export default function UserDashboard() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Freelancer Dashboard</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Talent Dashboard</h1>
           <p className="text-muted-foreground mt-1">Track your bids, assigned projects, and submissions.</p>
         </div>
         <Link href="/user/projects">
           <Button>Find New Projects</Button>
         </Link>
       </div>
-
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -80,7 +79,6 @@ export default function UserDashboard() {
           </CardContent>
         </Card>
       </div>
-
       <Link href="/user/wallet">
         <Card className="bg-gradient-to-r from-primary to-primary/80 text-white border-0 cursor-pointer hover:opacity-95 transition-opacity">
           <CardContent className="flex items-center justify-between py-4 px-5">
@@ -97,7 +95,6 @@ export default function UserDashboard() {
           </CardContent>
         </Card>
       </Link>
-
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
