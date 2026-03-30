@@ -102,7 +102,7 @@ export default function UserProjectDetail() {
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
             <div className="flex items-center gap-1"><Briefcase className="h-4 w-4" /> {project.category || "Uncategorized"}</div>
-            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `$${project.budget} Budget` : "Negotiable Budget"}</div>
+            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")} Budget` : "Negotiable Budget"}</div>
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function UserProjectDetail() {
                         name="amount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="font-semibold text-slate-700">Bid Amount (USD)</FormLabel>
+                            <FormLabel className="font-semibold text-slate-700">Bid Amount (₹ INR)</FormLabel>
                             <FormControl>
                               <div className="relative">
                                 <DollarSign className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
@@ -203,7 +203,7 @@ export default function UserProjectDetail() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-sm text-slate-500 mb-1">Bid Amount</div>
-                    <div className="text-xl font-bold text-slate-800">${existingBid.amount}</div>
+                    <div className="text-xl font-bold text-slate-800">₹{Number(existingBid.amount).toLocaleString("en-IN")}</div>
                   </div>
                   <div>
                     <div className="text-sm text-slate-500 mb-1">Status</div>

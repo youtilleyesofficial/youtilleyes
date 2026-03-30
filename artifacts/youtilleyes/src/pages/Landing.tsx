@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
-import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase } from "lucide-react";
+import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase, Linkedin, Twitter, Facebook, Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Landing() {
   return (
@@ -185,27 +185,124 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Contact Info */}
-        <section id="contact" className="py-16 px-4 bg-slate-900 text-slate-300">
-          <div className="container mx-auto max-w-6xl grid md:grid-cols-2 gap-10">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
-                <span className="font-bold text-xl text-white tracking-tight">YouTillEyes</span>
+        {/* 4-Column Footer */}
+        <footer id="contact" className="bg-slate-900 text-slate-300 pt-16 pb-8 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+              {/* Column 1 – Company */}
+              <div>
+                <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto mb-4" />
+                <p className="text-sm leading-relaxed text-slate-400 mb-5">
+                  The premier B2B talent marketplace connecting exceptional professionals with high-value opportunities across Uttar Pradesh and beyond.
+                </p>
+                <div className="flex items-center gap-1.5 text-sm text-slate-400 mb-2">
+                  <MapPin className="h-4 w-4 text-secondary shrink-0" />
+                  Uttar Pradesh, India
+                </div>
+                <div className="flex items-center gap-1.5 text-sm text-slate-400 mb-2">
+                  <Phone className="h-4 w-4 text-secondary shrink-0" />
+                  +91 7084424242
+                </div>
+                <div className="flex items-center gap-1.5 text-sm text-slate-400 mb-5">
+                  <Mail className="h-4 w-4 text-secondary shrink-0" />
+                  info@youtilleyes.com
+                </div>
+                <div className="flex gap-3">
+                  <a href="#" aria-label="LinkedIn" className="h-9 w-9 rounded-full bg-slate-700 hover:bg-secondary flex items-center justify-center transition-colors">
+                    <Linkedin className="h-4 w-4" />
+                  </a>
+                  <a href="#" aria-label="Twitter" className="h-9 w-9 rounded-full bg-slate-700 hover:bg-secondary flex items-center justify-center transition-colors">
+                    <Twitter className="h-4 w-4" />
+                  </a>
+                  <a href="#" aria-label="Facebook" className="h-9 w-9 rounded-full bg-slate-700 hover:bg-secondary flex items-center justify-center transition-colors">
+                    <Facebook className="h-4 w-4" />
+                  </a>
+                  <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-full bg-slate-700 hover:bg-secondary flex items-center justify-center transition-colors">
+                    <Instagram className="h-4 w-4" />
+                  </a>
+                  <a href="#" aria-label="YouTube" className="h-9 w-9 rounded-full bg-slate-700 hover:bg-secondary flex items-center justify-center transition-colors">
+                    <Youtube className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
-              <p className="mb-6 max-w-md">The premier B2B talent marketplace connecting exceptional professionals with high-value opportunities.</p>
+
+              {/* Column 2 – Our Pages */}
+              <div>
+                <h4 className="text-white font-bold text-base mb-5 uppercase tracking-wider">Our Pages</h4>
+                <ul className="space-y-3 text-sm">
+                  {[
+                    { label: "Home", href: "/" },
+                    { label: "Features", href: "#features" },
+                    { label: "How it Works", href: "#how-it-works" },
+                    { label: "Testimonials", href: "#testimonials" },
+                    { label: "FAQ", href: "#faq" },
+                    { label: "Contact Us", href: "#contact" },
+                  ].map(link => (
+                    <li key={link.label}>
+                      <a href={link.href} className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-1.5">
+                        <ArrowRight className="h-3 w-3 opacity-50" />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 3 – For Users & Clients */}
+              <div>
+                <h4 className="text-white font-bold text-base mb-5 uppercase tracking-wider">Quick Links</h4>
+                <ul className="space-y-3 text-sm">
+                  {[
+                    { label: "Browse Projects", href: "/user/projects" },
+                    { label: "Client Dashboard", href: "/client/dashboard" },
+                    { label: "My Work", href: "/user/assigned" },
+                    { label: "Post a Project", href: "/client/projects/create" },
+                    { label: "My Bids", href: "/user/bids" },
+                    { label: "Help & Support", href: "#contact" },
+                  ].map(link => (
+                    <li key={link.label}>
+                      <Link href={link.href} className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-1.5">
+                        <ArrowRight className="h-3 w-3 opacity-50" />
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 4 – Legal */}
+              <div>
+                <h4 className="text-white font-bold text-base mb-5 uppercase tracking-wider">Legal</h4>
+                <ul className="space-y-3 text-sm">
+                  {[
+                    { label: "Terms & Conditions", href: "#" },
+                    { label: "Privacy Policy", href: "#" },
+                    { label: "Cookie Policy", href: "#" },
+                    { label: "Refund Policy", href: "#" },
+                    { label: "Disclaimer", href: "#" },
+                    { label: "FAQ", href: "#faq" },
+                  ].map(link => (
+                    <li key={link.label}>
+                      <a href={link.href} className="text-slate-400 hover:text-secondary transition-colors flex items-center gap-1.5">
+                        <ArrowRight className="h-3 w-3 opacity-50" />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
-            <div className="flex flex-col items-start md:items-end justify-center">
-              <h4 className="text-white font-bold mb-4 text-lg">Contact Us</h4>
-              <p className="mb-2">Headquarters: Uttar Pradesh, India</p>
-              <p className="text-xl font-medium text-secondary">+91 7084424242</p>
+
+            {/* Bottom bar */}
+            <div className="border-t border-slate-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+              <p>&copy; {new Date().getFullYear()} YouTillEyes. All rights reserved.</p>
+              <p>Made with ❤ in Uttar Pradesh, India &nbsp;|&nbsp; Currency: ₹ INR</p>
             </div>
           </div>
-        </section>
+        </footer>
       </main>
-      <footer className="bg-slate-950 text-slate-500 py-6 text-center text-sm border-t border-slate-800">
-        <p>&copy; {new Date().getFullYear()} YouTillEyes. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

@@ -73,7 +73,7 @@ export default function ClientProjectDetail() {
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
             <div className="flex items-center gap-1"><Briefcase className="h-4 w-4" /> {project.category || "Uncategorized"}</div>
-            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `$${project.budget}` : "Negotiable"}</div>
+            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}</div>
             <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /> Created {new Date(project.createdAt).toLocaleDateString()}</div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function ClientProjectDetail() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="font-bold text-lg text-primary">${bid.amount}</div>
+                          <div className="font-bold text-lg text-primary">₹{Number(bid.amount).toLocaleString("en-IN")}</div>
                           <StatusBadge status={bid.status} />
                         </div>
                       </div>

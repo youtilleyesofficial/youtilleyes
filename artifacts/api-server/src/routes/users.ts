@@ -3,6 +3,7 @@ import { db } from "@workspace/db";
 import { usersTable } from "@workspace/db/schema";
 import { eq, ilike, or } from "drizzle-orm";
 import { authenticate, requireRole, type AuthenticatedRequest } from "../middlewares/auth.js";
+import { hashPassword } from "../lib/auth.js";
 
 const router = Router();
 
@@ -74,6 +75,81 @@ router.patch("/me", authenticate, async (req: AuthenticatedRequest, res) => {
     res.json(updated);
   } catch (err) {
     req.log.error({ err }, "Update user error");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.patch("/:id", authenticate, requireRole("ADMIN"), async (req: AuthenticatedRequest, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const { name, email, phone, bio, skills, role, isActive, password } = req.body;
+
+    const updates: Record<string, any> = { updatedAt: new Date() };
+    if (name !== undefined) updates.name = name;
+    if (email !== undefined) updates.email = email;
+    if (phone !== undefined) updates.phone = phone;
+    if (bio !== undefined) updates.bio = bio;
+    if (skills !== undefined) updates.skills = skills;
+    if (role !== undefined && ["ADMIN", "CLIENT", "USER"].includes(role)) updates.role = role;
+    if (isActive !== undefined) updates.isActive = isActive;
+    if (password && password.trim().length >= 6) {
+      updates.password = hashPassword(password.trim());
+    }
+
+    const [updated] = await db
+      .update(usersTable)
+      .set(updates)
+      .where(eq(usersTable.id, id))
+      .returning({ id: usersTable.id, name: usersTable.name, email: usersTable.email, role: usersTable.role, phone: usersTable.phone, bio: usersTable.bio, skills: usersTable.skills, avatarUrl: usersTable.avatarUrl, isActive: usersTable.isActive, createdAt: usersTable.createdAt });
+
+    if (!updated) {
+      res.status(404).json({ error: "Not Found", message: "User not found" });
+      return;
+    }
+    res.json(updated);
+  } catch (err) {
+    req.log.error({ err }, "Admin update user error");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.patch("/:id/block", authenticate, requireRole("ADMIN"), async (req: AuthenticatedRequest, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const [current] = await db.select({ isActive: usersTable.isActive }).from(usersTable).where(eq(usersTable.id, id));
+    if (!current) {
+      res.status(404).json({ error: "Not Found", message: "User not found" });
+      return;
+    }
+    const [updated] = await db
+      .update(usersTable)
+      .set({ isActive: !current.isActive, updatedAt: new Date() })
+      .where(eq(usersTable.id, id))
+      .returning({ id: usersTable.id, name: usersTable.name, email: usersTable.email, role: usersTable.role, phone: usersTable.phone, isActive: usersTable.isActive, createdAt: usersTable.createdAt });
+
+    res.json(updated);
+  } catch (err) {
+    req.log.error({ err }, "Admin block/unblock user error");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/:id", authenticate, requireRole("ADMIN"), async (req: AuthenticatedRequest, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const adminId = req.user!.id;
+    if (id === adminId) {
+      res.status(400).json({ error: "Bad Request", message: "Cannot delete your own account" });
+      return;
+    }
+    const result = await db.delete(usersTable).where(eq(usersTable.id, id)).returning({ id: usersTable.id });
+    if (!result.length) {
+      res.status(404).json({ error: "Not Found", message: "User not found" });
+      return;
+    }
+    res.json({ success: true, deletedId: id });
+  } catch (err) {
+    req.log.error({ err }, "Admin delete user error");
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

@@ -107,7 +107,7 @@ export default function ClientProjects() {
                       </div>
                       <div className="flex items-center gap-1">
                         <DollarSign className="h-3.5 w-3.5" />
-                        {project.budget ? `$${project.budget}` : "Negotiable"}
+                        {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}
                       </div>
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5" />
