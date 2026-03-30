@@ -318,7 +318,7 @@ export default function Landing() {
             {/* Bottom bar */}
             <div className="border-t border-slate-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
               <p>&copy; {new Date().getFullYear()} YouTillEyes. All rights reserved.</p>
-              <p>Made with ❤ in Uttar Pradesh, India &nbsp;|&nbsp; Currency: ₹ INR</p>
+              <p>Made with ❤ Niskutech &nbsp;|&nbsp; Currency: ₹ INR</p>
             </div>
           </div>
         </footer>
