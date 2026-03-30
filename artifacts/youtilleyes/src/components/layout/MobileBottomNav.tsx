@@ -46,7 +46,7 @@ export function MobileBottomNav() {
       className="md:!hidden fixed bottom-0 left-0 right-0 z-[9999] bg-white border-t-2 border-gray-100 h-16 items-stretch shadow-[0_-2px_10px_rgba(0,0,0,0.08)]"
     >
       {tabs.map(({ href, icon: Icon, label }) => (
-        <Link key={href} href={href} style={{ flex: 1, display: "flex" }}>
+        <Link key={label} href={href} style={{ flex: 1, display: "flex" }}>
           <div className={cn(
             "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
             isActive(href) ? "text-primary" : "text-gray-400"

@@ -9,9 +9,8 @@ export default function Landing() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto rounded shadow-sm" />
-            <span className="font-bold text-xl text-primary tracking-tight hidden sm:inline-block">YouTillEyes</span>
           </div>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
