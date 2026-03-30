@@ -18,17 +18,8 @@ export default function Landing() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img
-              src={logoImg}
-              alt="YouTillEyes Logo"
-              className="h-9 w-auto max-w-[44px] object-contain object-left"
-              style={{ imageRendering: 'auto' }}
-            />
-            <span className="font-extrabold text-lg tracking-tight text-primary leading-none">
-              YouTillEyes
-              <span className="block text-[10px] font-medium text-muted-foreground tracking-normal leading-tight">Where Talent Meets Opportunity</span>
-            </span>
+          <div className="flex items-center">
+            <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
           </div>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
