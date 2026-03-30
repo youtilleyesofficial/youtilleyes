@@ -1,24 +1,26 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
-import { Home, Briefcase, FolderOpen, User, LogIn } from "lucide-react";
+import { Home, Briefcase, FolderOpen, LogIn, LayoutDashboard, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function MobileBottomNav() {
   const { user } = useAuth();
   const [location] = useLocation();
 
-  const homeHref = user?.role === "ADMIN"
+  const dashboardHref = user?.role === "ADMIN"
     ? "/admin/dashboard"
     : user?.role === "CLIENT"
     ? "/client/dashboard"
     : user?.role === "USER"
     ? "/user/dashboard"
-    : "/";
+    : null;
 
   const liveProjectsHref = user?.role === "ADMIN"
     ? "/admin/projects"
     : user?.role === "USER"
     ? "/user/projects"
+    : user?.role === "CLIENT"
+    ? "/client/projects"
     : "/";
 
   const myProjectsHref = user?.role === "ADMIN"
@@ -34,30 +36,68 @@ export function MobileBottomNav() {
   const isActive = (href: string) =>
     location === href || location.startsWith(href + "/");
 
-  const tabs = [
-    { href: homeHref, icon: Home, label: "Home" },
-    { href: liveProjectsHref, icon: Briefcase, label: "Live Projects" },
-    { href: myProjectsHref, icon: FolderOpen, label: "My Projects" },
-  ];
-
   return (
     <nav
       style={{ display: "flex" }}
       className="md:!hidden fixed bottom-0 left-0 right-0 z-[9999] bg-white border-t-2 border-gray-100 h-16 items-stretch shadow-[0_-2px_10px_rgba(0,0,0,0.08)]"
     >
-      {tabs.map(({ href, icon: Icon, label }) => (
-        <Link key={label} href={href} style={{ flex: 1, display: "flex" }}>
+      {/* Home → always landing page */}
+      <Link href="/" style={{ flex: 1, display: "flex" }}>
+        <div className={cn(
+          "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
+          location === "/" ? "text-primary" : "text-gray-400"
+        )}>
+          <Home className="h-5 w-5" />
+          <span className="text-[10px] font-semibold">Home</span>
+        </div>
+      </Link>
+
+      {/* Dashboard → role-specific dashboard (only when logged in) */}
+      {user && dashboardHref ? (
+        <Link href={dashboardHref} style={{ flex: 1, display: "flex" }}>
           <div className={cn(
             "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
-            isActive(href) ? "text-primary" : "text-gray-400"
+            isActive(dashboardHref) ? "text-primary" : "text-gray-400"
           )}>
-            <Icon className="h-5 w-5" />
-            <span className="text-[10px] font-semibold">{label}</span>
+            <LayoutDashboard className="h-5 w-5" />
+            <span className="text-[10px] font-semibold">Dashboard</span>
           </div>
         </Link>
-      ))}
+      ) : (
+        <Link href="/login" style={{ flex: 1, display: "flex" }}>
+          <div className={cn(
+            "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
+            isActive("/login") ? "text-primary" : "text-gray-400"
+          )}>
+            <LayoutDashboard className="h-5 w-5" />
+            <span className="text-[10px] font-semibold">Dashboard</span>
+          </div>
+        </Link>
+      )}
 
-      {/* Profile / Login tab */}
+      {/* Live / Browse Projects */}
+      <Link href={liveProjectsHref} style={{ flex: 1, display: "flex" }}>
+        <div className={cn(
+          "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
+          isActive(liveProjectsHref) && liveProjectsHref !== "/" ? "text-primary" : "text-gray-400"
+        )}>
+          <Briefcase className="h-5 w-5" />
+          <span className="text-[10px] font-semibold">Projects</span>
+        </div>
+      </Link>
+
+      {/* My Projects / Assigned */}
+      <Link href={myProjectsHref} style={{ flex: 1, display: "flex" }}>
+        <div className={cn(
+          "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
+          isActive(myProjectsHref) ? "text-primary" : "text-gray-400"
+        )}>
+          <FolderOpen className="h-5 w-5" />
+          <span className="text-[10px] font-semibold">My Work</span>
+        </div>
+      </Link>
+
+      {/* Profile / Login */}
       <Link href={profileHref} style={{ flex: 1, display: "flex" }}>
         <div className={cn(
           "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",

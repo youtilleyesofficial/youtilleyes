@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useLogout } from "@workspace/api-client-react";
-import { LogOut, Briefcase, FileText, Users, Activity, Menu, MoreHorizontal } from "lucide-react";
+import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -81,6 +81,21 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
           </div>
 
           <nav className="flex-1 space-y-1">
+            {/* Home always goes to landing page */}
+            <Link href="/" className={cn(
+              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              location === "/"
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+            )}>
+              <Home className="h-4 w-4" />
+              Home
+            </Link>
+
+            {/* Divider */}
+            <div className="my-1 border-t border-sidebar-border/40" />
+
+            {/* Role-specific nav items */}
             {allNavItems.map((item) => (
               <Link key={item.href} href={item.href} className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
