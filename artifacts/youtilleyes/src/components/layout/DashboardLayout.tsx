@@ -6,7 +6,7 @@ import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home } fr
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
+import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 
 interface NavItem {
   title: string;
@@ -77,7 +77,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         <div className="flex flex-col flex-1 p-4 h-full">
           {/* Logo only — no title text */}
           <div className="flex items-center px-2 py-4 mb-6">
-            <img src={logoImg} alt="YouTillEyes Logo" className="h-9 w-auto rounded object-cover bg-white p-1" />
+            <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
           </div>
 
           <nav className="flex-1 space-y-1">
@@ -134,7 +134,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       {/* Mobile Header — logo only, + hamburger only if there are extra items */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 border-b bg-sidebar text-sidebar-foreground z-50 flex items-center justify-between px-4">
         {/* Logo only — no title text */}
-        <img src={logoImg} alt="Logo" className="h-7 w-auto rounded bg-white p-0.5" />
+        <img src={logoImg} alt="Logo" className="h-8 w-auto" />
 
         {/* Hamburger for extra pages not in bottom nav */}
         {extraMobileItems.length > 0 && (

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
+import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase } from "lucide-react";
 
 export default function Landing() {
@@ -10,7 +10,7 @@ export default function Landing() {
       <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center">
-            <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto rounded shadow-sm" />
+            <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
           </div>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
@@ -190,7 +190,7 @@ export default function Landing() {
           <div className="container mx-auto max-w-6xl grid md:grid-cols-2 gap-10">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto rounded bg-white p-1" />
+                <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
                 <span className="font-bold text-xl text-white tracking-tight">YouTillEyes</span>
               </div>
               <p className="mb-6 max-w-md">The premier B2B talent marketplace connecting exceptional professionals with high-value opportunities.</p>

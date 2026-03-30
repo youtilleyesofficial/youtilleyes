@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Loader2, X } from "lucide-react";
-import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
+import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -72,7 +72,7 @@ export default function Register() {
     <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 py-12 pb-20 md:pb-12">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center">
-          <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />
+          <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto" />
         </Link>
       </div>
 

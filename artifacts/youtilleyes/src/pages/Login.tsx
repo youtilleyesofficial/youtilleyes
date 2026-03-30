@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Loader2, X } from "lucide-react";
-import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401_1774898763065.webp";
+import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -80,7 +80,7 @@ export default function Login() {
     <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 pb-20 md:pb-4">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center">
-          <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />
+          <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto" />
         </Link>
       </div>
 
