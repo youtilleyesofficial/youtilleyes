@@ -69,7 +69,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 py-12">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 py-12 pb-20 md:pb-12">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center gap-3">
           <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />

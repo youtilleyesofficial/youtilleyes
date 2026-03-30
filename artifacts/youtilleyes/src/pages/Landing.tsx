@@ -5,7 +5,7 @@ import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase } fro
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col pb-16 md:pb-0">
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">

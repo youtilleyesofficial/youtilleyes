@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { Loader2 } from "lucide-react";
 import NotFound from "@/pages/not-found";
 import { useHealthCheck, getHealthCheckQueryKey } from "@workspace/api-client-react";
@@ -151,6 +152,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <AuthProvider>
             <Router />
+            <MobileBottomNav />
           </AuthProvider>
         </WouterRouter>
         <Toaster />

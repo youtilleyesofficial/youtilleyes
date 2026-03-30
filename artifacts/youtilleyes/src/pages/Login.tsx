@@ -58,8 +58,26 @@ export default function Login() {
     );
   };
 
+  const quickLogin = (email: string, password: string) => {
+    form.setValue("email", email);
+    form.setValue("password", password);
+    setErrorMsg(null);
+    loginMutation.mutate(
+      { data: { email, password } },
+      {
+        onSuccess: (response) => {
+          login(response.token, response.user);
+          if (response.user.role === "ADMIN") setLocation("/admin/dashboard");
+          else if (response.user.role === "CLIENT") setLocation("/client/dashboard");
+          else setLocation("/user/dashboard");
+        },
+        onError: () => setErrorMsg("Quick login failed"),
+      }
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4 pb-20 md:pb-4">
       <div className="mb-8 text-center">
         <Link href="/" className="inline-flex items-center gap-3">
           <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto rounded shadow-sm" />
@@ -139,6 +157,40 @@ export default function Login() {
           </div>
         </CardFooter>
       </Card>
+
+      {/* Quick Demo Login */}
+      <div className="mt-6 w-full max-w-md">
+        <p className="text-center text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wider">Quick Demo Login</p>
+        <div className="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            onClick={() => quickLogin("user1@example.com", "User@123")}
+            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 transition-all"
+          >
+            <span className="text-lg">👤</span>
+            <span className="text-xs font-bold text-primary">User</span>
+            <span className="text-[10px] text-muted-foreground">Demo</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => quickLogin("client1@example.com", "Client@123")}
+            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-secondary/40 hover:border-secondary hover:bg-secondary/5 transition-all"
+          >
+            <span className="text-lg">🏢</span>
+            <span className="text-xs font-bold text-secondary">Client</span>
+            <span className="text-[10px] text-muted-foreground">Demo</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => quickLogin("admin1@youtilleyes.com", "Admin@123")}
+            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-gray-300 hover:border-gray-500 hover:bg-gray-50 transition-all"
+          >
+            <span className="text-lg">🛡️</span>
+            <span className="text-xs font-bold text-gray-700">Admin</span>
+            <span className="text-[10px] text-muted-foreground">Demo</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
