@@ -43,6 +43,8 @@ artifacts-monorepo/
 - **projects** — id, title, description, category, budget, deadline, status (Open/Assigned/In-Progress/Submitted/Completed), clientId, assignedUserId, timestamps
 - **bids** — id, projectId, userId, amount, proposal, timeline, status (Pending/Accepted/Rejected), timestamps
 - **submissions** — id, projectId, userId, fileUrl, fileDescription, notes, status (Pending/Approved/Forwarded/Rejected), adminNotes, timestamps
+- **wallet_balances** — id, userId (unique), balance, totalEarned, updatedAt
+- **withdrawal_requests** — id, userId, amount, bankName, accountNumber, ifscCode, accountHolder, upiId, status (pending/approved/rejected), adminNote, timestamps
 
 ## User Roles
 
@@ -60,6 +62,7 @@ All routes served under `/api`:
 - `/submissions` — CRUD, user/mine, project/:projectId
 - `/dashboard/admin|client|user` — role-specific summaries
 - `/dashboard/activity` — recent platform activity feed
+- `/wallet` — GET user wallet balance; POST /withdraw; GET /admin/all; GET /admin/withdrawals; PATCH /admin/withdrawals/:id; POST /admin/credit
 
 ## Seed Data (Test Accounts)
 

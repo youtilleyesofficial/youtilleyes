@@ -3,14 +3,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { FileText, Loader2, ArrowRight, Activity, CheckCircle, Briefcase } from "lucide-react";
+import { FileText, Loader2, ArrowRight, Activity, CheckCircle, Briefcase, Wallet, IndianRupee } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function UserDashboard() {
   const { data: dashboard, isLoading } = useGetUserDashboard({
-    query: {
-      queryKey: getGetUserDashboardQueryKey()
-    }
+    query: { queryKey: getGetUserDashboardQueryKey() }
   });
+  const [walletBalance, setWalletBalance] = useState<string>("0");
+
+  useEffect(() => {
+    const token = localStorage.getItem("youtilleyes_token");
+    fetch("/api/wallet", { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.wallet) setWalletBalance(d.wallet.balance); })
+      .catch(() => {});
+  }, []);
 
   if (isLoading) {
     return (
@@ -34,7 +42,7 @@ export default function UserDashboard() {
         </Link>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
@@ -55,7 +63,7 @@ export default function UserDashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Approved Submissions</CardTitle>
+            <CardTitle className="text-sm font-medium">Approved</CardTitle>
             <CheckCircle className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
@@ -64,7 +72,7 @@ export default function UserDashboard() {
         </Card>
         <Card className="bg-primary/5 border-primary/20">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-primary">Available Opportunities</CardTitle>
+            <CardTitle className="text-sm font-medium text-primary">Opportunities</CardTitle>
             <Briefcase className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
@@ -72,6 +80,23 @@ export default function UserDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      <Link href="/user/wallet">
+        <Card className="bg-gradient-to-r from-primary to-primary/80 text-white border-0 cursor-pointer hover:opacity-95 transition-opacity">
+          <CardContent className="flex items-center justify-between py-4 px-5">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 rounded-full p-2"><Wallet className="h-5 w-5" /></div>
+              <div>
+                <div className="text-xs text-white/75 font-medium">Wallet Balance</div>
+                <div className="text-2xl font-bold flex items-center gap-0.5">
+                  <IndianRupee className="h-5 w-5" />{Number(walletBalance).toLocaleString("en-IN")}
+                </div>
+              </div>
+            </div>
+            <div className="text-sm text-white/80 font-medium">Withdraw →</div>
+          </CardContent>
+        </Card>
+      </Link>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>

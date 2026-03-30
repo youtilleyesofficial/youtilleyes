@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useLogout } from "@workspace/api-client-react";
-import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home, ChevronRight, Building2 } from "lucide-react";
+import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home, ChevronRight, Building2, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
@@ -49,6 +49,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       { title: "Projects", href: "/admin/projects", icon: Briefcase },
       { title: "Bids", href: "/admin/bids", icon: FileText },
       { title: "Submissions", href: "/admin/submissions", icon: FileText },
+      { title: "Withdrawals", href: "/admin/withdrawals", icon: Wallet },
     ];
   } else if (user?.role === "CLIENT") {
     allNavItems = [
@@ -62,6 +63,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       { title: "My Bids", href: "/user/bids", icon: FileText },
       { title: "Assigned Projects", href: "/user/assigned", icon: Building2 },
       { title: "My Submissions", href: "/user/submissions", icon: FileText },
+      { title: "Wallet", href: "/user/wallet", icon: Wallet },
     ];
   }
 
@@ -71,12 +73,14 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
     extraMobileItems = [
       { title: "My Bids", href: "/user/bids", icon: FileText },
       { title: "My Submissions", href: "/user/submissions", icon: FileText },
+      { title: "Wallet", href: "/user/wallet", icon: Wallet },
     ];
   } else if (user?.role === "ADMIN") {
     extraMobileItems = [
       { title: "Users", href: "/admin/users", icon: Users },
       { title: "Bids", href: "/admin/bids", icon: FileText },
       { title: "Submissions", href: "/admin/submissions", icon: FileText },
+      { title: "Withdrawals", href: "/admin/withdrawals", icon: Wallet },
     ];
   } else if (user?.role === "CLIENT") {
     extraMobileItems = [];
@@ -184,7 +188,6 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               </div>
             </Link>
           )}
-        {extraMobileItems.length > 0 && (
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="text-sidebar-foreground hover:bg-sidebar-accent">
@@ -214,22 +217,27 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
                   </div>
                 </Link>
 
-                <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider px-3 mb-2">
-                  More
-                </p>
-                <nav className="flex-1 space-y-0.5">
-                  {extraMobileItems.map((item) => (
-                    <Link key={item.href} href={item.href} className={cn(
-                      "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-                      isActive(item.href)
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                        : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
-                    )}>
-                      <item.icon className="h-4 w-4" />
-                      {item.title}
-                    </Link>
-                  ))}
-                </nav>
+                {extraMobileItems.length > 0 && (
+                  <>
+                    <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider px-3 mb-2">
+                      More
+                    </p>
+                    <nav className="space-y-0.5 mb-4">
+                      {extraMobileItems.map((item) => (
+                        <Link key={item.href} href={item.href} className={cn(
+                          "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                          isActive(item.href)
+                            ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                            : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                        )}>
+                          <item.icon className="h-4 w-4" />
+                          {item.title}
+                        </Link>
+                      ))}
+                    </nav>
+                  </>
+                )}
+
                 <div className="mt-auto border-t border-sidebar-border pt-4">
                   <Button
                     variant="ghost"
@@ -243,7 +251,6 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
               </div>
             </SheetContent>
           </Sheet>
-        )}
         </div>
       </div>
 

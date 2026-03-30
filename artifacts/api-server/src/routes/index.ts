@@ -6,6 +6,7 @@ import projectsRouter from "./projects.js";
 import bidsRouter from "./bids.js";
 import submissionsRouter from "./submissions.js";
 import dashboardRouter from "./dashboard.js";
+import walletRouter from "./wallet.js";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/projects", projectsRouter);
 router.use("/bids", bidsRouter);
 router.use("/submissions", submissionsRouter);
 router.use("/dashboard", dashboardRouter);
+router.use("/wallet", walletRouter);
 
 export default router;

@@ -40,6 +40,10 @@ import AdminProjects from "@/pages/admin/Projects";
 import AdminProjectDetail from "@/pages/admin/ProjectDetail";
 import AdminBids from "@/pages/admin/Bids";
 import AdminSubmissions from "@/pages/admin/Submissions";
+import AdminWithdrawals from "@/pages/admin/Withdrawals";
+
+// User Wallet
+import WalletPage from "@/pages/user/Wallet";
 
 const queryClient = new QueryClient();
 
@@ -136,6 +140,9 @@ function Router() {
       <Route path="/user/submissions">
         {() => <ProtectedRoute component={MySubmissions} allowedRoles={["USER"]} />}
       </Route>
+      <Route path="/user/wallet">
+        {() => <ProtectedRoute component={WalletPage} allowedRoles={["USER"]} />}
+      </Route>
 
       {/* Profile Route */}
       <Route path="/profile">
@@ -160,6 +167,9 @@ function Router() {
       </Route>
       <Route path="/admin/submissions">
         {() => <ProtectedRoute component={AdminSubmissions} allowedRoles={["ADMIN"]} />}
+      </Route>
+      <Route path="/admin/withdrawals">
+        {() => <ProtectedRoute component={AdminWithdrawals} allowedRoles={["ADMIN"]} />}
       </Route>
 
       <Route component={NotFound} />
