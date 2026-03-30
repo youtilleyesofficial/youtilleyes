@@ -142,17 +142,20 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       </main>
 
       {/* Mobile Sticky Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 flex items-stretch">
+      <nav
+        style={{ display: 'flex' }}
+        className="md:!hidden fixed bottom-0 left-0 right-0 z-[999] bg-white border-t-2 border-gray-200 h-16 items-stretch"
+      >
         {bottomNavItems.map((item) => {
           const isActive = location === item.href || location.startsWith(item.href + "/");
           return (
-            <Link key={item.href} href={item.href} className="flex-1">
+            <Link key={item.href} href={item.href} style={{ flex: 1, display: 'flex' }}>
               <div className={cn(
-                "flex flex-col items-center justify-center py-2 gap-0.5 transition-colors h-full",
-                isActive ? "text-primary" : "text-gray-500"
+                "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
+                isActive ? "text-primary" : "text-gray-400"
               )}>
-                <item.icon className={cn("h-5 w-5", isActive && "text-primary")} />
-                <span className="text-[10px] font-medium leading-tight text-center">{item.title}</span>
+                <item.icon className="h-5 w-5" />
+                <span className="text-[10px] font-semibold leading-tight text-center">{item.title}</span>
               </div>
             </Link>
           );
@@ -160,12 +163,9 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         {/* Profile tab */}
         <Sheet open={profileOpen} onOpenChange={setProfileOpen}>
           <SheetTrigger asChild>
-            <button className={cn(
-              "flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-colors",
-              "text-gray-500"
-            )}>
+            <button style={{ flex: 1 }} className="flex flex-col items-center justify-center gap-0.5 text-gray-400 transition-colors">
               <User className="h-5 w-5" />
-              <span className="text-[10px] font-medium leading-tight">Profile</span>
+              <span className="text-[10px] font-semibold leading-tight">Profile</span>
             </button>
           </SheetTrigger>
           <SheetContent side="bottom" className="rounded-t-2xl p-6">
