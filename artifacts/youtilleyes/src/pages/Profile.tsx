@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useLogout, useGetUserDashboard, getGetUserDashboardQueryKey, useGetClientDashboard, getGetClientDashboardQueryKey } from "@workspace/api-client-react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Camera, CheckCircle2, Star, LogOut, Edit3, Save, X,
   Mail, Phone, Briefcase, Shield, User, Award, Clock,
-  FileText, TrendingUp, ArrowLeft
+  FileText, TrendingUp, ArrowLeft, Wallet, IndianRupee
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
@@ -69,6 +69,16 @@ export default function ProfilePage() {
   const { data: clientDash } = useGetClientDashboard({
     query: { enabled: user?.role === "CLIENT", queryKey: getGetClientDashboardQueryKey() }
   });
+
+  const [walletBalance, setWalletBalance] = useState<string>("0");
+  useEffect(() => {
+    if (user?.role !== "USER") return;
+    const token = localStorage.getItem("youtilleyes_token");
+    fetch("/api/wallet", { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.wallet) setWalletBalance(d.wallet.balance); })
+      .catch(() => {});
+  }, [user?.role]);
 
   const isVerified = !!(user?.phone);
   const rating = user?.role === "USER" ? 4.7 : user?.role === "CLIENT" ? 4.3 : 5.0;
@@ -278,6 +288,26 @@ export default function ProfilePage() {
               </div>
             ))}
           </div>
+
+          {/* Wallet card — USER only */}
+          {user.role === "USER" && (
+            <div className="px-6 pb-2">
+              <Link href="/user/wallet">
+                <div className="flex items-center justify-between bg-gradient-to-r from-primary to-primary/80 text-white rounded-xl px-5 py-4 cursor-pointer hover:opacity-95 transition-opacity">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/20 rounded-full p-2"><Wallet className="h-5 w-5" /></div>
+                    <div>
+                      <div className="text-xs text-white/75 font-medium">Wallet Balance</div>
+                      <div className="text-2xl font-bold flex items-center gap-0.5">
+                        <IndianRupee className="h-5 w-5" />{Number(walletBalance).toLocaleString("en-IN")}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-sm text-white/80 font-medium">Withdraw →</div>
+                </div>
+              </Link>
+            </div>
+          )}
 
           {/* Edit button - mobile */}
           <div className="flex md:hidden gap-2 px-6 pb-4">
