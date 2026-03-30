@@ -1,5 +1,5 @@
 import { db } from "@workspace/db";
-import { usersTable, projectsTable, bidsTable, submissionsTable } from "@workspace/db/schema";
+import { usersTable, projectsTable, bidsTable, submissionsTable, walletBalancesTable, withdrawalRequestsTable } from "@workspace/db/schema";
 import crypto from "crypto";
 
 function hashPassword(password: string): string {
@@ -9,10 +9,12 @@ function hashPassword(password: string): string {
 async function seed() {
   console.log("Seeding database...");
 
-  // Clear existing data
+  // Clear existing data (order matters for foreign keys)
   await db.delete(submissionsTable);
   await db.delete(bidsTable);
   await db.delete(projectsTable);
+  await db.delete(withdrawalRequestsTable);
+  await db.delete(walletBalancesTable);
   await db.delete(usersTable);
 
   console.log("Cleared existing data.");
