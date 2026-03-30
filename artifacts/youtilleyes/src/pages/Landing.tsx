@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
+import footerLogoImg from "@assets/20260331_030902_1774906812939.png";
 import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase, Linkedin, Twitter, Facebook, Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
@@ -211,7 +212,7 @@ export default function Landing() {
 
               {/* Column 1 – Company */}
               <div>
-                <img src={logoImg} alt="YouTillEyes Logo" className="h-12 w-auto mb-4" />
+                <img src={footerLogoImg} alt="YouTillEyes Logo" className="h-12 w-auto mb-4" />
                 <p className="text-sm leading-relaxed text-slate-400 mb-5">
                   The premier B2B talent marketplace connecting exceptional professionals with high-value opportunities across Uttar Pradesh and beyond.
                 </p>
