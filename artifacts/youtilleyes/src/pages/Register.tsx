@@ -156,7 +156,7 @@ export default function Register() {
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="CLIENT">Hire Talent (Client)</SelectItem>
-                          <SelectItem value="USER">I am Talent (Freelancer)</SelectItem>
+                          <SelectItem value="USER">I am Talent (I want to work)</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
