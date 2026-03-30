@@ -2,15 +2,33 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 import { CheckCircle2, Users, Building, ShieldCheck, ArrowRight, Briefcase, Linkedin, Twitter, Facebook, Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Landing() {
+  const { user } = useAuth();
+
+  const dashboardHref = user?.role === "ADMIN"
+    ? "/admin/dashboard"
+    : user?.role === "CLIENT"
+    ? "/client/dashboard"
+    : "/user/dashboard";
+
   return (
     <div className="min-h-screen bg-background flex flex-col pb-16 md:pb-0">
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center">
-            <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
+          <div className="flex items-center gap-2">
+            <img
+              src={logoImg}
+              alt="YouTillEyes Logo"
+              className="h-9 w-auto max-w-[44px] object-contain object-left"
+              style={{ imageRendering: 'auto' }}
+            />
+            <span className="font-extrabold text-lg tracking-tight text-primary leading-none">
+              YouTillEyes
+              <span className="block text-[10px] font-medium text-muted-foreground tracking-normal leading-tight">Where Talent Meets Opportunity</span>
+            </span>
           </div>
           <nav className="hidden md:flex gap-6 text-sm font-medium">
             <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
@@ -18,13 +36,23 @@ export default function Landing() {
             <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
           </nav>
-          <div className="flex items-center gap-4">
-            <Link href="/login">
-              <Button variant="ghost" className="hidden sm:flex font-medium">Log in</Button>
-            </Link>
-            <Link href="/register">
-              <Button className="font-medium bg-secondary hover:bg-secondary/90 text-secondary-foreground">Get Started</Button>
-            </Link>
+          <div className="flex items-center gap-3">
+            {user ? (
+              <Link href={dashboardHref}>
+                <Button className="font-semibold bg-primary hover:bg-primary/90 text-white">
+                  Go to Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" className="hidden sm:flex font-medium">Log in</Button>
+                </Link>
+                <Link href="/register">
+                  <Button className="font-medium bg-secondary hover:bg-secondary/90 text-secondary-foreground">Get Started</Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>
