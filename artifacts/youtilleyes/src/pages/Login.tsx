@@ -156,40 +156,6 @@ export default function Login() {
           </div>
         </CardFooter>
       </Card>
-
-      {/* Quick Demo Login */}
-      <div className="mt-6 w-full max-w-md">
-        <p className="text-center text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wider">Quick Demo Login</p>
-        <div className="grid grid-cols-3 gap-2">
-          <button
-            type="button"
-            onClick={() => quickLogin("user1@example.com", "User@123")}
-            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 transition-all"
-          >
-            <span className="text-lg">👤</span>
-            <span className="text-xs font-bold text-primary">User</span>
-            <span className="text-[10px] text-muted-foreground">Demo</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => quickLogin("client1@example.com", "Client@123")}
-            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-secondary/40 hover:border-secondary hover:bg-secondary/5 transition-all"
-          >
-            <span className="text-lg">🏢</span>
-            <span className="text-xs font-bold text-secondary">Client</span>
-            <span className="text-[10px] text-muted-foreground">Demo</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => quickLogin("admin1@youtilleyes.com", "Admin@123")}
-            className="flex flex-col items-center gap-1 p-3 rounded-xl border-2 border-dashed border-gray-300 hover:border-gray-500 hover:bg-gray-50 transition-all"
-          >
-            <span className="text-lg">🛡️</span>
-            <span className="text-xs font-bold text-gray-700">Admin</span>
-            <span className="text-[10px] text-muted-foreground">Demo</span>
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
