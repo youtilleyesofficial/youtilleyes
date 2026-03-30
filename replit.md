@@ -18,7 +18,7 @@ Headquarters: Uttar Pradesh, India | Support: +91 7084424242
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 - **Frontend**: React + Vite + Tailwind CSS + Shadcn UI
-- **Auth**: JWT-based (custom HMAC-SHA256 tokens stored in localStorage)
+- **Auth**: JWT-based (custom HMAC-SHA256 tokens stored as `youtilleyes_token` in localStorage; `setAuthTokenGetter` wired in AuthContext.tsx so all API client hooks send the token automatically)
 - **Brand Colors**: Navy Blue (#1A428A), Sunset Orange (#F58220)
 
 ## Structure

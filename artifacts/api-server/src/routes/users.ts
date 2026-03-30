@@ -48,4 +48,34 @@ router.get("/:id", authenticate, async (req: AuthenticatedRequest, res) => {
   }
 });
 
+router.patch("/me", authenticate, async (req: AuthenticatedRequest, res) => {
+  try {
+    const { name, phone, bio, skills, avatarUrl } = req.body;
+    const userId = req.user!.id;
+
+    const updates: Record<string, any> = {};
+    if (name !== undefined) updates.name = name;
+    if (phone !== undefined) updates.phone = phone;
+    if (bio !== undefined) updates.bio = bio;
+    if (skills !== undefined) updates.skills = skills;
+    if (avatarUrl !== undefined) updates.avatarUrl = avatarUrl;
+    updates.updatedAt = new Date();
+
+    const [updated] = await db
+      .update(usersTable)
+      .set(updates)
+      .where(eq(usersTable.id, userId))
+      .returning({ id: usersTable.id, name: usersTable.name, email: usersTable.email, role: usersTable.role, phone: usersTable.phone, bio: usersTable.bio, skills: usersTable.skills, avatarUrl: usersTable.avatarUrl, isActive: usersTable.isActive, createdAt: usersTable.createdAt, updatedAt: usersTable.updatedAt });
+
+    if (!updated) {
+      res.status(404).json({ error: "Not Found", message: "User not found" });
+      return;
+    }
+    res.json(updated);
+  } catch (err) {
+    req.log.error({ err }, "Update user error");
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 export default router;

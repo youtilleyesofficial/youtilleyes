@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { User, useGetMe, getGetMeQueryKey } from "@workspace/api-client-react";
+import { User, useGetMe, getGetMeQueryKey, setAuthTokenGetter } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
+
+// Configure the API client to always send the auth token from localStorage
+setAuthTokenGetter(() => localStorage.getItem("youtilleyes_token"));
 
 interface AuthContextType {
   user: User | null;

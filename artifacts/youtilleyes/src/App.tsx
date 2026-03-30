@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import { useHealthCheck, getHealthCheckQueryKey } from "@workspace/api-client-react";
 
@@ -29,6 +30,9 @@ import AssignedProjects from "@/pages/user/AssignedProjects";
 import SubmitWork from "@/pages/user/SubmitWork";
 import MySubmissions from "@/pages/user/MySubmissions";
 
+// Profile Page
+import ProfilePage from "@/pages/Profile";
+
 // Admin Routes
 import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminUsers from "@/pages/admin/Users";
@@ -39,6 +43,18 @@ import AdminSubmissions from "@/pages/admin/Submissions";
 
 const queryClient = new QueryClient();
 
+// Protected Route (no layout wrapper)
+function ProtectedRouteRaw({ component: Component }: { component: any }) {
+  const { user, isLoading } = useAuth();
+  const [, setLocation] = useLocation();
+  useEffect(() => {
+    if (!isLoading && !user) setLocation("/login");
+  }, [isLoading, user, setLocation]);
+  if (isLoading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>;
+  if (!user) return null;
+  return <Component />;
+}
+
 // Protected Route Wrapper
 function ProtectedRoute({ component: Component, allowedRoles }: { component: any, allowedRoles?: string[] }) {
   const { user, isLoading } = useAuth();
@@ -48,6 +64,16 @@ function ProtectedRoute({ component: Component, allowedRoles }: { component: any
     query: { queryKey: getHealthCheckQueryKey(), staleTime: 60000 }
   });
 
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) { setLocation("/login"); return; }
+    if (allowedRoles && !allowedRoles.includes(user.role)) {
+      if (user.role === "ADMIN") setLocation("/admin/dashboard");
+      else if (user.role === "CLIENT") setLocation("/client/dashboard");
+      else setLocation("/user/dashboard");
+    }
+  }, [isLoading, user, setLocation]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -56,17 +82,8 @@ function ProtectedRoute({ component: Component, allowedRoles }: { component: any
     );
   }
 
-  if (!user) {
-    setLocation("/login");
-    return null;
-  }
-
-  if (allowedRoles && !allowedRoles.includes(user.role)) {
-    if (user.role === "ADMIN") setLocation("/admin/dashboard");
-    else if (user.role === "CLIENT") setLocation("/client/dashboard");
-    else setLocation("/user/dashboard");
-    return null;
-  }
+  if (!user) return null;
+  if (allowedRoles && !allowedRoles.includes(user.role)) return null;
 
   return (
     <DashboardLayout>
@@ -118,6 +135,11 @@ function Router() {
       </Route>
       <Route path="/user/submissions">
         {() => <ProtectedRoute component={MySubmissions} allowedRoles={["USER"]} />}
+      </Route>
+
+      {/* Profile Route */}
+      <Route path="/profile">
+        {() => <ProtectedRouteRaw component={ProfilePage} />}
       </Route>
 
       {/* Admin Routes */}
