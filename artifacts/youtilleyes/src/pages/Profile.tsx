@@ -14,7 +14,6 @@ import {
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetMeQueryKey } from "@workspace/api-client-react";
-import logoImg from "@assets/20260331_030902_1774908010698.png";
 
 const AVATAR_KEY = "youtilleyes_avatar";
 
@@ -166,7 +165,6 @@ export default function ProfilePage() {
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <img src={logoImg} alt="Logo" className="h-8 w-auto" />
             </div>
             <Button
               variant="ghost"
