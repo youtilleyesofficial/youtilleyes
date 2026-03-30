@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { Loader2, ArrowLeft, Calendar, DollarSign, Briefcase, CheckCircle2 } from "lucide-react";
+import { Loader2, ArrowLeft, Calendar, Briefcase, CheckCircle2 } from "lucide-react";
 
 const bidSchema = z.object({
   amount: z.coerce.number().min(1, "Bid amount must be greater than 0"),
@@ -102,7 +102,7 @@ export default function UserProjectDetail() {
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
             <div className="flex items-center gap-1"><Briefcase className="h-4 w-4" /> {project.category || "Uncategorized"}</div>
-            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")} Budget` : "Negotiable Budget"}</div>
+            <div className="flex items-center gap-1 text-emerald-700 font-semibold">{project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")} Budget` : "Negotiable Budget"}</div>
           </div>
         </div>
       </div>
@@ -138,8 +138,8 @@ export default function UserProjectDetail() {
                             <FormLabel className="font-semibold text-slate-700">Bid Amount (₹ INR)</FormLabel>
                             <FormControl>
                               <div className="relative">
-                                <DollarSign className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                                <Input type="number" className="pl-10 text-lg font-medium" {...field} />
+                                <span className="absolute left-3 top-2.5 text-base font-bold text-muted-foreground">₹</span>
+                                <Input type="number" className="pl-8 text-lg font-medium" {...field} />
                               </div>
                             </FormControl>
                             <FormMessage />

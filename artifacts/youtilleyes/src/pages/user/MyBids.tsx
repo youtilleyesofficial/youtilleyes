@@ -2,7 +2,7 @@ import { useGetUserBids, getGetUserBidsQueryKey } from "@workspace/api-client-re
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { Loader2, FileText, Calendar, DollarSign, ArrowRight } from "lucide-react";
+import { Loader2, FileText, Calendar, ArrowRight } from "lucide-react";
 
 export default function MyBids() {
   const { data: bids, isLoading } = useGetUserBids(undefined, {
@@ -61,9 +61,8 @@ export default function MyBids() {
                       </p>
                     )}
                     <div className="flex items-center gap-4 text-sm font-medium text-slate-700 bg-slate-50 w-fit px-3 py-1.5 rounded border border-slate-100">
-                      <div className="flex items-center gap-1 text-emerald-700">
-                        <DollarSign className="h-4 w-4" />
-                        {bid.amount}
+                      <div className="flex items-center gap-1 text-emerald-700 font-semibold">
+                        ₹{Number(bid.amount).toLocaleString("en-IN")}
                       </div>
                       <div className="w-px h-4 bg-slate-300"></div>
                       <div className="text-slate-600">

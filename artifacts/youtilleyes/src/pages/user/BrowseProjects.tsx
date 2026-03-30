@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Search, Calendar, DollarSign, Briefcase, Send, Users } from "lucide-react";
+import { Loader2, Search, Calendar, Briefcase, Send, Users } from "lucide-react";
 import { useState } from "react";
 
 export default function BrowseProjects() {
@@ -106,7 +106,6 @@ export default function BrowseProjects() {
                     <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-0.5">
                       {project.budget && (
                         <div className="flex items-center gap-1 text-emerald-700 font-semibold text-sm">
-                          <DollarSign className="h-3.5 w-3.5" />
                           ₹{Number(project.budget).toLocaleString("en-IN")} budget
                         </div>
                       )}

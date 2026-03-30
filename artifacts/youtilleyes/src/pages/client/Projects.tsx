@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, Search, Plus, Calendar, DollarSign, Briefcase } from "lucide-react";
+import { Loader2, Search, Plus, Calendar, Briefcase } from "lucide-react";
 import { useState } from "react";
 
 export default function ClientProjects() {
@@ -105,8 +105,7 @@ export default function ClientProjects() {
                         <Briefcase className="h-3.5 w-3.5" />
                         {project.category || "Uncategorized"}
                       </div>
-                      <div className="flex items-center gap-1">
-                        <DollarSign className="h-3.5 w-3.5" />
+                      <div className="flex items-center gap-1 text-emerald-700 font-semibold">
                         {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}
                       </div>
                       <div className="flex items-center gap-1">

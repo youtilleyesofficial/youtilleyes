@@ -133,7 +133,7 @@ export default function UserDashboard() {
                       <Link href={`/user/projects/${bid.projectId}`} className="font-medium hover:underline block truncate max-w-[200px] sm:max-w-[250px]">
                         {bid.project?.title || `Project #${bid.projectId}`}
                       </Link>
-                      <div className="font-semibold text-primary mt-1">${bid.amount}</div>
+                      <div className="font-semibold text-primary mt-1">₹{Number(bid.amount).toLocaleString("en-IN")}</div>
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <StatusBadge status={bid.status} />

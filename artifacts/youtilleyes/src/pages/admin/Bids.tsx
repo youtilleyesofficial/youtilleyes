@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { Button } from "@/components/ui/button";
-import { Loader2, Search, FileText, Calendar, DollarSign, Trash2 } from "lucide-react";
+import { Loader2, Search, FileText, Calendar, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminBids() {
@@ -123,7 +123,7 @@ export default function AdminBids() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="font-bold text-slate-900 flex items-center">
-                        <DollarSign className="h-4 w-4 text-emerald-600 mr-0.5" />{bid.amount}
+                        ₹{Number(bid.amount).toLocaleString("en-IN")}
                       </div>
                     </td>
                     <td className="px-6 py-4 text-slate-600">

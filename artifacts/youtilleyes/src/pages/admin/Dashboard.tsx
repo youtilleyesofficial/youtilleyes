@@ -170,7 +170,7 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-4 py-3 text-slate-600">{project.client?.name || `ID: ${project.clientId}`}</td>
                     <td className="px-4 py-3"><StatusBadge status={project.status} /></td>
-                    <td className="px-4 py-3 font-medium text-slate-700">{project.budget ? `$${project.budget}` : '-'}</td>
+                    <td className="px-4 py-3 font-medium text-slate-700">{project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : '-'}</td>
                     <td className="px-4 py-3 text-right font-semibold text-slate-700">{project.bidCount}</td>
                   </tr>
                 ))}

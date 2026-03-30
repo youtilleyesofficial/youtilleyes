@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { Loader2, Search, Briefcase, Calendar, DollarSign, ArrowRight } from "lucide-react";
+import { Loader2, Search, Briefcase, Calendar, ArrowRight } from "lucide-react";
 
 export default function AdminProjects() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,9 +97,8 @@ export default function AdminProjects() {
                         <Briefcase className="h-3.5 w-3.5 text-slate-400" />
                         {project.category || "Uncategorized"}
                       </div>
-                      <div className="flex items-center gap-1.5">
-                        <DollarSign className="h-3.5 w-3.5 text-slate-400" />
-                        {project.budget ? `$${project.budget}` : "Negotiable"}
+                      <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
+                        {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Calendar className="h-3.5 w-3.5 text-slate-400" />

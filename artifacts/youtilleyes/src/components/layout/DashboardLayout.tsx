@@ -2,9 +2,10 @@ import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
 import { useLogout } from "@workspace/api-client-react";
-import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home } from "lucide-react";
+import { LogOut, Briefcase, FileText, Users, Activity, MoreHorizontal, Home, ChevronRight, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 
@@ -13,6 +14,18 @@ interface NavItem {
   href: string;
   icon: React.ElementType;
 }
+
+const roleColors: Record<string, string> = {
+  ADMIN: "bg-purple-100 text-purple-700 border-purple-200",
+  CLIENT: "bg-blue-100 text-blue-700 border-blue-200",
+  USER: "bg-emerald-100 text-emerald-700 border-emerald-200",
+};
+
+const roleAvatarBg: Record<string, string> = {
+  ADMIN: "bg-purple-600",
+  CLIENT: "bg-blue-600",
+  USER: "bg-secondary",
+};
 
 export function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, logout: clearAuth } = useAuth();
@@ -44,13 +57,12 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       { title: "Dashboard", href: "/user/dashboard", icon: Activity },
       { title: "Browse Projects", href: "/user/projects", icon: Briefcase },
       { title: "My Bids", href: "/user/bids", icon: FileText },
-      { title: "Assigned Projects", href: "/user/assigned", icon: Briefcase },
+      { title: "Assigned Projects", href: "/user/assigned", icon: Building2 },
       { title: "My Submissions", href: "/user/submissions", icon: FileText },
     ];
   }
 
   // Extra items for mobile hamburger — only items NOT covered by MobileBottomNav
-  // MobileBottomNav covers: Home (dashboard), Browse/Projects, My Projects/Assigned, Profile
   let extraMobileItems: NavItem[] = [];
   if (user?.role === "USER") {
     extraMobileItems = [
@@ -70,20 +82,44 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const isActive = (href: string) =>
     location === href || location.startsWith(href + "/");
 
+  const avatarBg = roleAvatarBg[user?.role ?? "USER"] ?? "bg-secondary";
+  const roleBadgeClass = roleColors[user?.role ?? "USER"] ?? "";
+
   return (
     <div className="flex min-h-screen bg-background">
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-64 flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
         <div className="flex flex-col flex-1 p-4 h-full">
-          {/* Logo only — no title text */}
-          <div className="flex items-center px-2 py-4 mb-6">
+
+          {/* Logo */}
+          <div className="flex items-center px-2 pt-4 pb-3">
             <img src={logoImg} alt="YouTillEyes Logo" className="h-10 w-auto" />
           </div>
 
-          <nav className="flex-1 space-y-1">
-            {/* Home always goes to landing page */}
+          {/* Profile Card — clickable → /profile */}
+          <Link href="/profile">
+            <div className={cn(
+              "flex items-center gap-3 rounded-xl px-3 py-3 mb-4 cursor-pointer transition-all group",
+              "hover:bg-sidebar-accent/60 border border-sidebar-border/40 hover:border-sidebar-accent",
+              location === "/profile" ? "bg-sidebar-accent/80 border-sidebar-accent" : "bg-sidebar-accent/20"
+            )}>
+              <div className={cn("h-10 w-10 rounded-full flex items-center justify-center font-bold text-white text-base shrink-0 shadow-sm", avatarBg)}>
+                {user?.name.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex flex-col overflow-hidden flex-1 min-w-0">
+                <span className="text-sm font-semibold truncate text-sidebar-foreground leading-tight">{user?.name}</span>
+                <Badge variant="outline" className={cn("mt-1 w-fit text-[10px] px-1.5 py-0 border font-semibold", roleBadgeClass)}>
+                  {user?.role}
+                </Badge>
+              </div>
+              <ChevronRight className="h-4 w-4 text-sidebar-foreground/40 group-hover:text-sidebar-foreground/70 shrink-0 transition-colors" />
+            </div>
+          </Link>
+
+          <nav className="flex-1 space-y-0.5">
+            {/* Home */}
             <Link href="/" className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
               location === "/"
                 ? "bg-sidebar-accent text-sidebar-accent-foreground"
                 : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
@@ -93,12 +129,12 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
             </Link>
 
             {/* Divider */}
-            <div className="my-1 border-t border-sidebar-border/40" />
+            <div className="my-2 border-t border-sidebar-border/40" />
 
             {/* Role-specific nav items */}
             {allNavItems.map((item) => (
               <Link key={item.href} href={item.href} className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive(item.href)
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
                   : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
@@ -109,19 +145,11 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
 
-          <div className="p-4 mt-auto border-t border-sidebar-border">
-            <div className="flex items-center gap-3 mb-4 px-2">
-              <div className="h-8 w-8 rounded-full bg-sidebar-primary flex items-center justify-center text-sidebar-primary-foreground font-bold">
-                {user?.name.charAt(0).toUpperCase()}
-              </div>
-              <div className="flex flex-col overflow-hidden">
-                <span className="text-sm font-medium truncate">{user?.name}</span>
-                <span className="text-xs text-sidebar-foreground/60 truncate">{user?.role}</span>
-              </div>
-            </div>
+          {/* Logout */}
+          <div className="mt-auto pt-4 border-t border-sidebar-border">
             <Button
               variant="ghost"
-              className="w-full justify-start text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+              className="w-full justify-start text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
               onClick={handleLogout}
             >
               <LogOut className="h-4 w-4 mr-2" />
@@ -131,12 +159,10 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         </div>
       </aside>
 
-      {/* Mobile Header — logo only, + hamburger only if there are extra items */}
+      {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 h-16 border-b bg-sidebar text-sidebar-foreground z-50 flex items-center justify-between px-4">
-        {/* Logo only — no title text */}
         <img src={logoImg} alt="Logo" className="h-8 w-auto" />
 
-        {/* Hamburger for extra pages not in bottom nav */}
         {extraMobileItems.length > 0 && (
           <Sheet>
             <SheetTrigger asChild>
@@ -147,10 +173,26 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
             <SheetContent side="right" className="w-64 p-0 flex flex-col bg-sidebar text-sidebar-foreground border-sidebar-border">
               <SheetTitle className="sr-only">More navigation options</SheetTitle>
               <div className="flex flex-col flex-1 p-4">
-                <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider px-3 mb-3">
+
+                {/* Profile in mobile sheet too */}
+                <Link href="/profile">
+                  <div className="flex items-center gap-3 rounded-xl px-3 py-3 mb-4 bg-sidebar-accent/20 border border-sidebar-border/40 cursor-pointer hover:bg-sidebar-accent/60 transition-all">
+                    <div className={cn("h-9 w-9 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0", avatarBg)}>
+                      {user?.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="flex flex-col overflow-hidden">
+                      <span className="text-sm font-semibold truncate">{user?.name}</span>
+                      <Badge variant="outline" className={cn("mt-0.5 w-fit text-[10px] px-1.5 py-0 border font-semibold", roleBadgeClass)}>
+                        {user?.role}
+                      </Badge>
+                    </div>
+                  </div>
+                </Link>
+
+                <p className="text-xs font-semibold text-sidebar-foreground/50 uppercase tracking-wider px-3 mb-2">
                   More
                 </p>
-                <nav className="flex-1 space-y-1">
+                <nav className="flex-1 space-y-0.5">
                   {extraMobileItems.map((item) => (
                     <Link key={item.href} href={item.href} className={cn(
                       "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
@@ -164,15 +206,6 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
                   ))}
                 </nav>
                 <div className="mt-auto border-t border-sidebar-border pt-4">
-                  <div className="flex items-center gap-3 mb-3 px-2">
-                    <div className="h-8 w-8 rounded-full bg-sidebar-primary flex items-center justify-center text-sidebar-primary-foreground font-bold text-sm">
-                      {user?.name.charAt(0).toUpperCase()}
-                    </div>
-                    <div className="flex flex-col overflow-hidden">
-                      <span className="text-sm font-medium truncate">{user?.name}</span>
-                      <span className="text-xs text-sidebar-foreground/60 truncate">{user?.role}</span>
-                    </div>
-                  </div>
                   <Button
                     variant="ghost"
                     className="w-full justify-start text-sidebar-foreground/80 hover:bg-sidebar-accent/50"

@@ -12,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { Loader2, ArrowLeft, Calendar, DollarSign, Briefcase, FileText, Download } from "lucide-react";
+import { Loader2, ArrowLeft, Calendar, Briefcase, FileText, Download } from "lucide-react";
 
 export default function ClientProjectDetail() {
   const { id } = useParams();
@@ -73,7 +73,7 @@ export default function ClientProjectDetail() {
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
             <div className="flex items-center gap-1"><Briefcase className="h-4 w-4" /> {project.category || "Uncategorized"}</div>
-            <div className="flex items-center gap-1"><DollarSign className="h-4 w-4" /> {project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}</div>
+            <div className="flex items-center gap-1 text-emerald-700 font-semibold">{project.budget ? `₹${Number(project.budget).toLocaleString("en-IN")}` : "Negotiable"}</div>
             <div className="flex items-center gap-1"><Calendar className="h-4 w-4" /> Created {new Date(project.createdAt).toLocaleDateString()}</div>
           </div>
         </div>
