@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetMeQueryKey } from "@workspace/api-client-react";
-import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
+import logoImg from "@assets/20260331_030902_1774908010698.png";
 
 const AVATAR_KEY = "youtilleyes_avatar";
 
