@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetMeQueryKey } from "@workspace/api-client-react";
 
-const AVATAR_KEY = "youtilleyes_avatar";
+const getAvatarKey = (userId: number) => `youtilleyes_avatar_${userId}`;
 
 function StarRating({ value }: { value: number }) {
   return (
@@ -48,7 +48,10 @@ export default function ProfilePage() {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [verifyRequested, setVerifyRequested] = useState(false);
 
-  const [avatar, setAvatar] = useState<string | null>(() => localStorage.getItem(AVATAR_KEY));
+  const [avatar, setAvatar] = useState<string | null>(null);
+  useEffect(() => {
+    if (user?.id) setAvatar(localStorage.getItem(getAvatarKey(user.id)));
+  }, [user?.id]);
   const [form, setForm] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
@@ -90,7 +93,7 @@ export default function ProfilePage() {
     reader.onloadend = () => {
       const base64 = reader.result as string;
       setAvatar(base64);
-      localStorage.setItem(AVATAR_KEY, base64);
+      if (user?.id) localStorage.setItem(getAvatarKey(user.id), base64);
     };
     reader.readAsDataURL(file);
   };

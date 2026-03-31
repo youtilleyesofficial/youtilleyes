@@ -4,12 +4,12 @@ import { Home, Briefcase, FolderOpen, LogIn, LayoutDashboard } from "lucide-reac
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const AVATAR_KEY = "youtilleyes_avatar";
+const getAvatarKey = (userId: number) => `youtilleyes_avatar_${userId}`;
 
 export function MobileBottomNav() {
   const { user } = useAuth();
   const [location] = useLocation();
-  const [avatarSrc] = useState<string | null>(() => localStorage.getItem(AVATAR_KEY));
+  const [avatarSrc] = useState<string | null>(() => user?.id ? localStorage.getItem(getAvatarKey(user.id)) : null);
 
   const dashboardHref = user?.role === "ADMIN"
     ? "/admin/dashboard"

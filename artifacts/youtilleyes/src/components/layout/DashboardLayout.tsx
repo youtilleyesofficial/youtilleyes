@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import logoImg from "@assets/20260331_030902_1774906812939.png";
 
-const AVATAR_KEY = "youtilleyes_avatar";
+const getAvatarKey = (userId: number) => `youtilleyes_avatar_${userId}`;
 
 interface NavItem {
   title: string;
@@ -33,7 +33,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, logout: clearAuth } = useAuth();
   const [location] = useLocation();
   const logoutMutation = useLogout();
-  const [avatarSrc] = useState<string | null>(() => localStorage.getItem(AVATAR_KEY));
+  const [avatarSrc] = useState<string | null>(() => user?.id ? localStorage.getItem(getAvatarKey(user.id)) : null);
 
   const handleLogout = () => {
     logoutMutation.mutate(undefined, { onSuccess: () => clearAuth() });
