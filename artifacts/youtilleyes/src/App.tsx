@@ -15,6 +15,7 @@ import Landing from "@/pages/Landing";
 import AboutUs from "@/pages/AboutUs";
 import Vision from "@/pages/Vision";
 import ContactUs from "@/pages/ContactUs";
+import Services from "@/pages/Services";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 
@@ -105,6 +106,7 @@ function Router() {
       {/* Public routes */}
       <Route path="/" component={Landing} />
       <Route path="/about" component={AboutUs} />
+      <Route path="/services" component={Services} />
       <Route path="/vision" component={Vision} />
       <Route path="/contact" component={ContactUs} />
       <Route path="/login" component={Login} />

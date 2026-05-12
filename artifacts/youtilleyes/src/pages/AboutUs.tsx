@@ -32,6 +32,7 @@ function AboutIllustration() {
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
   { label: "Vision", href: "/vision" },
   { label: "Contact Us", href: "/contact" },
 ];
