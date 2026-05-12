@@ -12,6 +12,9 @@ import { useHealthCheck, getHealthCheckQueryKey } from "@workspace/api-client-re
 
 // Public Pages
 import Landing from "@/pages/Landing";
+import AboutUs from "@/pages/AboutUs";
+import Vision from "@/pages/Vision";
+import ContactUs from "@/pages/ContactUs";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 
@@ -101,6 +104,9 @@ function Router() {
     <Switch>
       {/* Public routes */}
       <Route path="/" component={Landing} />
+      <Route path="/about" component={AboutUs} />
+      <Route path="/vision" component={Vision} />
+      <Route path="/contact" component={ContactUs} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
 
