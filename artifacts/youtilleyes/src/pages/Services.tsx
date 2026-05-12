@@ -2,8 +2,9 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/24754a480f78dd7bd6173cfa1eb74401-Photoroom_1774903197281.png";
 import footerLogoImg from "@assets/20260331_030902_1774906812939.png";
-import { Linkedin, Twitter, Facebook, Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import { Linkedin, Twitter, Facebook, Instagram, Youtube, Phone, Mail, MapPin, Menu, X } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -193,6 +194,7 @@ const welfarePrograms = [
 
 export default function Services() {
   const { user } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dashboardHref =
     user?.role === "ADMIN" ? "/admin/dashboard" :
     user?.role === "CLIENT" ? "/client/dashboard" : "/user/dashboard";
@@ -201,24 +203,43 @@ export default function Services() {
     <div className="min-h-screen bg-white flex flex-col pb-16 md:pb-0">
       {/* Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/95 backdrop-blur shadow-sm">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/"><img src={logoImg} alt="YouTillEyes" className="h-10 w-auto cursor-pointer" /></Link>
+        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+          <Link href="/"><img src={logoImg} alt="YouTillEyes" className="h-9 md:h-10 w-auto cursor-pointer" /></Link>
           <nav className="hidden md:flex gap-7 text-sm font-medium">
             {navLinks.map(l => (
               <Link key={l.label} href={l.href} className={`transition-colors ${l.href === "/services" ? "text-primary font-bold" : "text-slate-500 hover:text-primary"}`}>{l.label}</Link>
             ))}
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {user ? (
-              <Link href={dashboardHref}><Button className="bg-primary hover:bg-primary/90 text-white font-semibold">Go to Dashboard</Button></Link>
+              <Link href={dashboardHref}><Button size="sm" className="bg-primary hover:bg-primary/90 text-white font-semibold text-xs md:text-sm">Dashboard</Button></Link>
             ) : (
               <>
-                <Link href="/login"><Button variant="ghost" className="hidden sm:flex text-slate-600">Log in</Button></Link>
-                <Link href="/register"><Button className="bg-secondary hover:bg-secondary/90 text-white font-semibold">Get Started</Button></Link>
+                <Link href="/login"><Button variant="ghost" size="sm" className="hidden sm:flex text-slate-600">Log in</Button></Link>
+                <Link href="/register"><Button size="sm" className="bg-secondary hover:bg-secondary/90 text-white font-semibold text-xs md:text-sm">Get Started</Button></Link>
               </>
             )}
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
+              {mobileOpen ? <X className="h-5 w-5 text-slate-700" /> : <Menu className="h-5 w-5 text-slate-700" />}
+            </button>
           </div>
         </div>
+        {mobileOpen && (
+          <div className="md:hidden border-t border-slate-100 bg-white/98 backdrop-blur">
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-1">
+              {navLinks.map(l => (
+                <Link key={l.label} href={l.href} onClick={() => setMobileOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${l.href === "/services" ? "bg-primary/10 text-primary" : "text-slate-600 hover:bg-slate-50"}`}>
+                  {l.label}
+                </Link>
+              ))}
+              <div className="flex gap-3 mt-3 pt-3 border-t border-slate-100">
+                <Link href="/login" className="flex-1"><Button variant="outline" className="w-full">Log in</Button></Link>
+                <Link href="/register" className="flex-1"><Button className="w-full bg-secondary text-white">Get Started</Button></Link>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main className="flex-1">
