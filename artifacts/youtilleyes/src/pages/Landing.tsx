@@ -151,7 +151,7 @@ export default function Landing() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs md:text-sm font-bold mb-6 md:mb-8" style={{ background: "rgba(26,66,138,0.08)", borderColor: "rgba(26,66,138,0.2)", color: "#1A428A" }}>
                   <span className="h-2 w-2 rounded-full animate-pulse" style={{ background: "#1A428A" }} />
-                  Folks-Force Platform — Live Now
+                  Folks-Force Platform is Live Now
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-3 leading-[1.1]">
                   Aap Nazro Tak
@@ -163,7 +163,7 @@ export default function Landing() {
                   Discover your identity. Unlock your potential.
                 </p>
                 <p className="text-sm md:text-base text-slate-500 leading-relaxed mb-8 md:mb-10">
-                  YouTillEyes is a people-powered ecosystem that helps individuals identify their true abilities, purpose, and place in society — connecting talent with the right opportunities, projects, and missions.
+                  YouTillEyes is a people-powered ecosystem that helps individuals identify their true abilities, purpose, and place in society. We connect talent with the right opportunities, projects, and missions.
                 </p>
 
                 {/* Floating glass stat cards — mobile prominent */}
@@ -259,7 +259,7 @@ export default function Landing() {
               "The strength of society begins with the identification of individual potential."
             </blockquote>
             <p className="text-blue-100 text-sm md:text-lg max-w-3xl mx-auto leading-relaxed">
-              YouTillEyes represents a modern framework of origin, existence, and human utilization — where individuals are recognized not only for who they are, but for what they can create, contribute, and achieve together. Through the Folks-Force Platform, we build powerful networks that help identify the right individuals for the right opportunities.
+              YouTillEyes represents a modern framework of origin, existence, and human utilization. Here individuals are recognized not only for who they are, but for what they can create, contribute, and achieve together. Through the Folks-Force Platform, we build powerful networks that help identify the right individuals for the right opportunities.
             </p>
           </div>
         </section>
@@ -270,7 +270,7 @@ export default function Landing() {
             <div className="text-center mb-10 md:mb-16">
               <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "#F58220" }}>It's All About You</p>
               <h2 className="text-2xl md:text-5xl font-black text-slate-900 mb-4 md:mb-5">The Identify Yourself Journey</h2>
-              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">A structured path from self-discovery to real-world opportunity — six steps that transform who you are into what you can achieve.</p>
+              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">A structured path from self-discovery to real-world opportunity. Six steps that transform who you are into what you can achieve.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[
@@ -278,7 +278,7 @@ export default function Landing() {
                 { n: "02", title: "Identify Your Objectives", tag: "What Do You Want?", emoji: "🎯", desc: "Define your goals, ambitions, and future direction. A person with clear objectives moves forward with unstoppable momentum.", color: "#F58220" },
                 { n: "03", title: "Identify Your Skills", tag: "What Can You Do?", emoji: "⭐", desc: "Showcase your talents, expertise, and practical abilities. Every skill you own has the power to change someone else's world.", color: "#1A428A" },
                 { n: "04", title: "Identify Your Eligibility", tag: "Where Do You Fit?", emoji: "✅", desc: "Discover where your qualifications and capabilities fit best. The right fit creates extraordinary results for both you and those around you.", color: "#F58220" },
-                { n: "05", title: "Identify Your Tasks", tag: "What Work Suits You?", emoji: "⚡", desc: "Connect with meaningful work, projects, and responsibilities. Purposeful work is not just a job — it is a contribution to something greater.", color: "#1A428A" },
+                { n: "05", title: "Identify Your Tasks", tag: "What Work Suits You?", emoji: "⚡", desc: "Connect with meaningful work, projects, and responsibilities. Purposeful work is not just a job. It is a contribution to something greater.", color: "#1A428A" },
                 { n: "06", title: "Identify Your Platform", tag: "Where Will You Grow?", emoji: "🌐", desc: "Find the right environment, people, and opportunities to grow. The right platform amplifies your potential beyond what you imagined.", color: "#F58220" },
               ].map((item, i) => (
                 <div key={i} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1">
@@ -308,7 +308,7 @@ export default function Landing() {
             <div className="text-center mb-10 md:mb-16">
               <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "#F58220" }}>Time to Explore</p>
               <h2 className="text-2xl md:text-5xl font-black text-slate-900 mb-4 md:mb-5">Who Can Join YouTillEyes?</h2>
-              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Whether you are a student with extraordinary hobbies, an artist waiting to be discovered, or a professional with skills to share — your place is here.</p>
+              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Whether you are a student with extraordinary hobbies, an artist waiting to be discovered, or a professional with skills to share, your place is here.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[
@@ -338,7 +338,7 @@ export default function Landing() {
                 <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ color: "#F58220" }}>Folks-Force Platform</p>
                 <h2 className="text-2xl md:text-5xl font-black mb-5 md:mb-6 leading-tight">A Force of Capability, Collaboration and Creation</h2>
                 <p className="text-blue-200 text-sm md:text-lg leading-relaxed mb-6 md:mb-8">
-                  The Folks-Force Platform is designed to build a powerful network that helps identify the right individuals for the right opportunities, projects, and missions. This is more than a platform — it is a movement.
+                  The Folks-Force Platform is designed to build a powerful network that helps identify the right individuals for the right opportunities, projects, and missions. This is more than a platform. It is a movement.
                 </p>
                 <p className="text-white font-bold text-sm md:text-lg italic mb-8 md:mb-10" style={{ borderLeft: "4px solid #F58220", paddingLeft: "1rem" }}>
                   "Because when the right people connect, everything becomes possible."
@@ -373,13 +373,13 @@ export default function Landing() {
             <div className="text-center mb-10 md:mb-16">
               <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "#F58220" }}>User-Friendly Portal</p>
               <h2 className="text-2xl md:text-5xl font-black text-slate-900 mb-4 md:mb-5">Platform Features</h2>
-              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Smart categorization and personalized selection — so you always find exactly where you belong.</p>
+              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Smart categorization and personalized selection, so you always find exactly where you belong.</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
               <div className="space-y-2 md:space-y-4">
                 {[
                   { icon: "🎯", title: "Choose Your Interests", desc: "Personalize your entire experience by telling us what matters most to you." },
-                  { icon: "🔀", title: "Select Your User Stream", desc: "Whether you are Talent, Client, or Explorer — your path is clearly defined." },
+                  { icon: "🔀", title: "Select Your User Stream", desc: "Whether you are Talent, Client, or Explorer, your path is clearly defined." },
                   { icon: "📂", title: "Explore Relevant Categories", desc: "Browse curated categories that perfectly match your skills and objectives." },
                   { icon: "⚙️", title: "Set Default Preferences", desc: "Configure your settings once and let the platform work for you automatically." },
                   { icon: "🌐", title: "Connect with Community", desc: "Build real connections with like-minded people, collaborators, and supporters." },
@@ -439,7 +439,7 @@ export default function Landing() {
           </div>
           <div className="container mx-auto max-w-3xl text-white relative z-10">
             <h2 className="text-2xl md:text-5xl font-black mb-4 md:mb-6">Be Part of the Movement</h2>
-            <p className="text-white/85 text-base md:text-xl mb-8 md:mb-10 leading-relaxed">Join YouTillEyes and start your journey of self-identification. Aap Nazro Tak — until you are truly seen.</p>
+            <p className="text-white/85 text-base md:text-xl mb-8 md:mb-10 leading-relaxed">Join YouTillEyes and start your journey of self-identification. Aap Nazro Tak, until you are truly seen.</p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Link href="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full h-12 md:h-14 px-8 text-sm md:text-base font-black bg-white text-slate-900 hover:bg-slate-100 shadow-xl">
@@ -461,7 +461,7 @@ export default function Landing() {
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
               <div className="col-span-2 sm:col-span-1">
                 <img src={footerLogoImg} alt="YouTillEyes" className="h-10 md:h-12 w-auto mb-4 md:mb-5" />
-                <p className="text-xs md:text-sm leading-relaxed text-slate-400 mb-4 md:mb-6">Aap Nazro Tak — Utilize Yourself. A people-powered ecosystem connecting talent with opportunity.</p>
+                <p className="text-xs md:text-sm leading-relaxed text-slate-400 mb-4 md:mb-6">Aap Nazro Tak. Utilize Yourself. A people-powered ecosystem connecting talent with opportunity.</p>
                 <div className="space-y-2 mb-4 md:mb-6">
                   <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400"><MapPin className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />Uttar Pradesh, India</div>
                   <div className="flex items-center gap-2 text-xs md:text-sm text-slate-400"><Phone className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />+91 7084424242</div>

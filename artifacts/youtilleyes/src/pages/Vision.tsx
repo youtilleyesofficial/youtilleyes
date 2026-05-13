@@ -46,12 +46,12 @@ function VisionSVG() {
 }
 
 const steps = [
-  { n: "01", emoji: "👁️", title: "Identify Yourself", tag: "Who Are You?", desc: "We envision a world where every person deeply understands their own personality, strengths, mindset, and purpose. Self-awareness is the first step to a meaningful life — and we believe everyone deserves the space to discover themselves fully.", color: "#1A428A" },
-  { n: "02", emoji: "🎯", title: "Identify Your Objectives", tag: "What Do You Want?", desc: "A future where individuals are empowered to clearly define their goals, ambitions, and direction — and have the support structures, communities, and tools to pursue them with confidence and clarity.", color: "#F58220" },
-  { n: "03", emoji: "⭐", title: "Identify Your Skills", tag: "What Can You Do?", desc: "We envision a platform where talent — from art to technology, from trades to leadership — is recognized, showcased, and valued equally. Every skill matters, and every skill has a market.", color: "#1A428A" },
-  { n: "04", emoji: "✅", title: "Identify Your Eligibility", tag: "Where Do You Fit?", desc: "A world where qualifications and capabilities are matched intelligently to the right roles and opportunities — creating perfect fits that benefit both the individual and the organization they serve.", color: "#F58220" },
-  { n: "05", emoji: "⚡", title: "Identify Your Tasks", tag: "What Work Suits You?", desc: "We see a future where meaningful work finds the right person — every project, mission, and responsibility connected to the most capable, passionate individual perfectly suited for that role.", color: "#1A428A" },
-  { n: "06", emoji: "🌐", title: "Identify Your Platform", tag: "Where Will You Grow?", desc: "Our ultimate vision: every individual finds their perfect environment — the right community, network, and ecosystem to grow, collaborate, thrive, and leave a lasting impact on the world around them.", color: "#F58220" },
+  { n: "01", emoji: "👁️", title: "Identify Yourself", tag: "Who Are You?", desc: "We envision a world where every person deeply understands their own personality, strengths, mindset, and purpose. Self-awareness is the first step to a meaningful life and we believe everyone deserves the space to discover themselves fully.", color: "#1A428A" },
+  { n: "02", emoji: "🎯", title: "Identify Your Objectives", tag: "What Do You Want?", desc: "A future where individuals are empowered to clearly define their goals, ambitions, and direction. They have the support structures, communities, and tools to pursue them with confidence and clarity.", color: "#F58220" },
+  { n: "03", emoji: "⭐", title: "Identify Your Skills", tag: "What Can You Do?", desc: "We envision a platform where talent, from art to technology, from trades to leadership, is recognized, showcased, and valued equally. Every skill matters, and every skill has a market.", color: "#1A428A" },
+  { n: "04", emoji: "✅", title: "Identify Your Eligibility", tag: "Where Do You Fit?", desc: "A world where qualifications and capabilities are matched intelligently to the right roles and opportunities, creating perfect fits that benefit both the individual and the organization they serve.", color: "#F58220" },
+  { n: "05", emoji: "⚡", title: "Identify Your Tasks", tag: "What Work Suits You?", desc: "We see a future where meaningful work finds the right person. Every project, mission, and responsibility is connected to the most capable and passionate individual perfectly suited for that role.", color: "#1A428A" },
+  { n: "06", emoji: "🌐", title: "Identify Your Platform", tag: "Where Will You Grow?", desc: "Our ultimate vision is that every individual finds their perfect environment. The right community, network, and ecosystem to grow, collaborate, thrive, and leave a lasting impact on the world.", color: "#F58220" },
 ];
 
 export default function Vision() {
@@ -117,7 +117,7 @@ export default function Vision() {
                   A World Where Every Individual Is Seen
                 </h1>
                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed mb-8">
-                  We envision a future where no talent goes unnoticed, no potential remains unused, and every person finds their right place in the world. Aap Nazro Tak — until you are truly seen.
+                  We envision a future where no talent goes unnoticed, no potential remains unused, and every person finds their right place in the world. Aap Nazro Tak, until you are truly seen.
                 </p>
                 {/* Mobile 3 mini cards */}
                 <div className="flex gap-3 flex-wrap md:hidden mb-8">
@@ -150,9 +150,9 @@ export default function Vision() {
         <section className="py-14 md:py-20 px-4 md:px-6" style={{ background: "linear-gradient(135deg, #1A428A 0%, #0d2a5e 100%)" }}>
           <div className="container mx-auto max-w-4xl text-center text-white">
             <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-5" style={{ color: "#F58220" }}>The Big Picture</p>
-            <h2 className="text-2xl md:text-4xl font-black mb-5 md:mb-6">Aap Nazro Tak — Until You Are Seen</h2>
+            <h2 className="text-2xl md:text-4xl font-black mb-5 md:mb-6">Aap Nazro Tak. Until You Are Seen.</h2>
             <p className="text-blue-100 text-sm md:text-xl leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto">
-              Our vision is to create a world where every individual's identity, skills, and purpose are identified, recognized, and put to meaningful use — where talent meets opportunity at every level of society.
+              Our vision is to create a world where every individual's identity, skills, and purpose are identified, recognized, and put to meaningful use. Talent meets opportunity at every level of society.
             </p>
             <blockquote className="text-lg md:text-2xl font-black italic text-left max-w-2xl mx-auto py-5 px-6 md:py-6 md:px-8 rounded-2xl" style={{ background: "rgba(245, 130, 32, 0.15)", borderLeft: "5px solid #F58220" }}>
               "The strength of society begins with the identification of individual potential."
@@ -197,14 +197,14 @@ export default function Vision() {
             <div className="text-center mb-10 md:mb-16">
               <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "#F58220" }}>Utilize Point</p>
               <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-4 md:mb-5">What We Want to Create</h2>
-              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Our vision is built on a simple promise — every individual will be exposed, empowered, connected, and enabled to live their fullest life.</p>
+              <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto">Our vision is built on a simple promise. Every individual will be exposed, empowered, connected, and enabled to live their fullest life.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
               {[
-                { emoji: "👁️", title: "Expose", color: "#1A428A", bg: "#EEF2FF", border: "#C7D2FE", desc: "Be exposed around the society — make yourself visible everywhere at once. True visibility means freedom and the ability to get your needs fulfilled from anywhere by someone who can truly help you." },
-                { emoji: "💪", title: "Empower", color: "#F58220", bg: "#FFF7ED", border: "#FED7AA", desc: "Every talent, every skill, every individual ability deserves a platform to grow. We envision a world where people are empowered to utilize themselves at every level — personally, professionally, and socially." },
-                { emoji: "🌐", title: "Connect", color: "#1A428A", bg: "#EEF2FF", border: "#C7D2FE", desc: "Building bridges between people who have skills and people who need them. From students to businesses, from artists to organizations — the right connection changes everything and opens invisible doors." },
-                { emoji: "💡", title: "Enable", color: "#F58220", bg: "#FFF7ED", border: "#FED7AA", desc: "Creating the conditions where ideas become actions, where potential becomes achievement, and where individuals become the leaders of their own success story — supported by a community that believes in them." },
+                { emoji: "👁️", title: "Expose", color: "#1A428A", bg: "#EEF2FF", border: "#C7D2FE", desc: "Be exposed around the society and make yourself visible everywhere at once. True visibility means freedom and the ability to get your needs fulfilled from anywhere by someone who can truly help you." },
+                { emoji: "💪", title: "Empower", color: "#F58220", bg: "#FFF7ED", border: "#FED7AA", desc: "Every talent, every skill, every individual ability deserves a platform to grow. We envision a world where people are empowered to utilize themselves at every level, personally, professionally, and socially." },
+                { emoji: "🌐", title: "Connect", color: "#1A428A", bg: "#EEF2FF", border: "#C7D2FE", desc: "Building bridges between people who have skills and people who need them. From students to businesses, from artists to organizations, the right connection changes everything and opens invisible doors." },
+                { emoji: "💡", title: "Enable", color: "#F58220", bg: "#FFF7ED", border: "#FED7AA", desc: "Creating the conditions where ideas become actions, where potential becomes achievement, and where individuals become the leaders of their own success story, supported by a community that believes in them." },
               ].map((item, i) => (
                 <div key={i} className="rounded-3xl p-7 md:p-10 hover:shadow-xl transition-all duration-300 border" style={{ background: item.bg, borderColor: item.border }}>
                   <div className="text-5xl md:text-6xl mb-4 md:mb-5">{item.emoji}</div>
@@ -222,7 +222,7 @@ export default function Vision() {
             <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ color: "#F58220" }}>Folks-Force Platform</p>
             <h2 className="text-2xl md:text-4xl font-black mb-6 md:mb-8">When the Right People Connect, Everything Becomes Possible</h2>
             <p className="text-blue-100 text-sm md:text-xl leading-relaxed mb-10 md:mb-14 max-w-3xl mx-auto">
-              Through the Folks-Force Platform, we are building a powerful global network — a collaborative force that identifies the right individuals for the right opportunities, missions, and projects. One connection at a time, we are changing lives.
+              Through the Folks-Force Platform, we are building a powerful global network. A collaborative force that identifies the right individuals for the right opportunities, missions, and projects. One connection at a time, we are changing lives.
             </p>
             <div className="grid grid-cols-3 gap-4 md:gap-6">
               {[
@@ -258,7 +258,7 @@ export default function Vision() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
               <div className="col-span-2 lg:col-span-1">
                 <img src={footerLogoImg} alt="YouTillEyes" className="h-10 md:h-12 w-auto mb-4" />
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak — Utilize Yourself.</p>
+                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak. Utilize Yourself.</p>
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2 text-xs text-slate-400"><MapPin className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />Uttar Pradesh, India</div>
                   <div className="flex items-center gap-2 text-xs text-slate-400"><Phone className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />+91 7084424242</div>

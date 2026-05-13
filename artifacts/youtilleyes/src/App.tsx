@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -197,6 +198,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <AuthProvider>
+            <ScrollToTop />
             <Router />
             <MobileBottomNav />
           </AuthProvider>

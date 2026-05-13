@@ -161,7 +161,7 @@ export default function ContactUs() {
               <div>
                 <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 md:mb-5">Reach Out to Us</h2>
                 <p className="text-slate-500 text-sm md:text-lg mb-8 md:mb-10 leading-relaxed">
-                  Whether you are a talent looking to showcase your skills, a client with a project to post, or simply curious about what YouTillEyes can do for you — we are just one message away.
+                  Whether you are a talent looking to showcase your skills, a client with a project to post, or simply curious about what YouTillEyes can do for you, we are just one message away.
                 </p>
                 <div className="space-y-4 md:space-y-6 mb-10 md:mb-12">
                   {[
@@ -276,7 +276,7 @@ export default function ContactUs() {
         <section className="py-14 md:py-20 px-4 md:px-6 bg-slate-50">
           <div className="container mx-auto max-w-4xl text-center">
             <h2 className="text-xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4">Still Have Questions?</h2>
-            <p className="text-slate-500 text-sm md:text-lg mb-8 md:mb-10">Check out our frequently asked questions or write to us directly — we are always happy to help.</p>
+            <p className="text-slate-500 text-sm md:text-lg mb-8 md:mb-10">Check out our frequently asked questions or write to us directly. We are always happy to help.</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
               {[
                 { emoji: "🎯", title: "For Talent", desc: "Questions about joining, bidding, or getting paid? We have all the answers." },
@@ -299,7 +299,7 @@ export default function ContactUs() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
               <div className="col-span-2 lg:col-span-1">
                 <img src={footerLogoImg} alt="YouTillEyes" className="h-10 md:h-12 w-auto mb-4" />
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak — Utilize Yourself.</p>
+                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak. Utilize Yourself.</p>
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2 text-xs text-slate-400"><MapPin className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />Uttar Pradesh, India</div>
                   <div className="flex items-center gap-2 text-xs text-slate-400"><Phone className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />+91 7084424242</div>

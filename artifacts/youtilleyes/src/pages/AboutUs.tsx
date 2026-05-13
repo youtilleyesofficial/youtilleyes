@@ -35,7 +35,7 @@ function AboutSVG() {
         </g>
       ))}
       <rect x="60" y="296" width="280" height="16" rx="6" fill="#1A428A" fillOpacity="0.06" />
-      <text x="108" y="307" fontSize="10.5" fill="#1A428A" fontWeight="800" opacity="0.5">Aap Nazro Tak — Utilize Yourself</text>
+      <text x="108" y="307" fontSize="10.5" fill="#1A428A" fontWeight="800" opacity="0.5">Aap Nazro Tak. Utilize Yourself.</text>
     </svg>
   );
 }
@@ -105,7 +105,7 @@ export default function AboutUs() {
                 </h1>
                 <h2 className="text-2xl md:text-3xl font-extrabold mb-5 md:mb-6" style={{ color: "#F58220" }}>Aap Nazro Tak.</h2>
                 <p className="text-sm md:text-lg text-slate-600 leading-relaxed mb-8">
-                  We are a people-powered ecosystem designed to help individuals identify their true abilities, purpose, and place in society — because every person carries unique value that deserves to be seen and utilized.
+                  We are a people-powered ecosystem designed to help individuals identify their true abilities, purpose, and place in society. Every person carries unique value that deserves to be seen and utilized.
                 </p>
                 {/* Mobile stat pills */}
                 <div className="flex flex-wrap gap-3 md:hidden mb-8">
@@ -142,7 +142,7 @@ export default function AboutUs() {
                 <p className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-4" style={{ color: "#F58220" }}>What We Believe</p>
                 <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-5">Everyone Carries Unique Value</h2>
                 <p className="text-slate-600 leading-relaxed mb-4 text-sm md:text-lg">
-                  YouTillEyes was born from a simple but powerful belief — every person carries unique value, skills, and potential that can contribute meaningfully to the world.
+                  YouTillEyes was born from a simple but powerful belief. Every person carries unique value, skills, and potential that can contribute meaningfully to the world.
                 </p>
                 <p className="text-slate-600 leading-relaxed mb-4 text-sm md:text-base">
                   We believe that everyone has skills in their life that need to be utilized in the right directions to reach the right places and connections.
@@ -179,7 +179,7 @@ export default function AboutUs() {
               "The strength of society begins with the identification of individual potential."
             </blockquote>
             <p className="text-blue-100 text-sm md:text-lg max-w-3xl mx-auto leading-relaxed">
-              YouTillEyes represents a modern framework of origin, existence, and human utilization — where individuals are recognized not only for who they are, but for what they can create, contribute, and achieve together.
+              YouTillEyes represents a modern framework of origin, existence, and human utilization. Individuals are recognized not only for who they are, but for what they can create, contribute, and achieve together.
             </p>
           </div>
         </section>
@@ -194,9 +194,9 @@ export default function AboutUs() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[
-                { emoji: "🎯", title: "Identify Capable Individuals", desc: "We help people discover who they truly are — their strengths, skills, and purpose. No talent goes unnoticed.", bg: "#EEF2FF", border: "#C7D2FE" },
+                { emoji: "🎯", title: "Identify Capable Individuals", desc: "We help people discover who they truly are, their strengths, skills, and purpose. No talent goes unnoticed.", bg: "#EEF2FF", border: "#C7D2FE" },
                 { emoji: "🤝", title: "Build Collaborative Networks", desc: "Connecting like-minded people, professionals, and businesses so they can achieve shared goals together.", bg: "#FFF7ED", border: "#FED7AA" },
-                { emoji: "⚡", title: "Match People with Opportunities", desc: "Every person finds the right project or mission that fits their unique profile — no mismatches, only perfect connections.", bg: "#EEF2FF", border: "#C7D2FE" },
+                { emoji: "⚡", title: "Match People with Opportunities", desc: "Every person finds the right project or mission that fits their unique profile. No mismatches, only perfect connections.", bg: "#EEF2FF", border: "#C7D2FE" },
                 { emoji: "💪", title: "Empower Communities", desc: "Strengthening communities by putting individual talents to work for collective progress and shared success.", bg: "#FFF7ED", border: "#FED7AA" },
                 { emoji: "🚀", title: "Real-World Execution", desc: "Transforming ideas, ambitions, and skills into real outcomes through structured collaboration. We deliver.", bg: "#EEF2FF", border: "#C7D2FE" },
                 { emoji: "✨", title: "A Force of Creation", desc: "When the right people connect, everything becomes possible. We make those connections happen every day.", bg: "#FFF7ED", border: "#FED7AA" },
@@ -220,13 +220,13 @@ export default function AboutUs() {
             </div>
             <div className="rounded-3xl p-7 md:p-14 border border-slate-100 shadow-sm" style={{ background: "linear-gradient(135deg, #fafbff, #fff8f0)" }}>
               <p className="text-sm md:text-lg text-slate-600 leading-relaxed mb-5 md:mb-6">
-                YouTillEyes was founded in Uttar Pradesh, India, with the vision of creating a platform where every individual — regardless of background, qualification, or location — can be seen, valued, and utilized for their unique capabilities.
+                YouTillEyes was founded in Uttar Pradesh, India, with the vision of creating a platform where every individual, regardless of background, qualification, or location, can be seen, valued, and utilized for their unique capabilities.
               </p>
               <p className="text-sm md:text-lg text-slate-600 leading-relaxed mb-5 md:mb-6">
-                We saw a gap: countless talented people with extraordinary skills going unnoticed, while businesses and clients struggled to find the right people for their projects. We built YouTillEyes to bridge that gap — not just as a marketplace, but as a full ecosystem of identification, connection, and growth.
+                We saw a gap: countless talented people with extraordinary skills going unnoticed, while businesses and clients struggled to find the right people for their projects. We built YouTillEyes to bridge that gap, not just as a marketplace, but as a full ecosystem of identification, connection, and growth.
               </p>
               <p className="text-base md:text-xl text-slate-800 leading-relaxed font-semibold italic" style={{ borderLeft: "4px solid #F58220", paddingLeft: "1.25rem" }}>
-                This is more than a platform — it is a Force of Capability, Collaboration, and Creation. And we are just getting started.
+                This is more than a platform. It is a Force of Capability, Collaboration, and Creation. And we are just getting started.
               </p>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function AboutUs() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-12">
               <div className="col-span-2 lg:col-span-1">
                 <img src={footerLogoImg} alt="YouTillEyes" className="h-10 md:h-12 w-auto mb-4" />
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak — Utilize Yourself.</p>
+                <p className="text-xs text-slate-400 mb-4 leading-relaxed">Aap Nazro Tak. Utilize Yourself.</p>
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center gap-2 text-xs text-slate-400"><MapPin className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />Uttar Pradesh, India</div>
                   <div className="flex items-center gap-2 text-xs text-slate-400"><Phone className="h-3 w-3 shrink-0" style={{ color: "#F58220" }} />+91 7084424242</div>
