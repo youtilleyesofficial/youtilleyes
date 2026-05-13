@@ -564,7 +564,7 @@ export default function Community() {
           {/* Main Feed */}
           <div className="flex-1 min-w-0">
             {/* Filter Tabs */}
-            <div className="flex gap-1.5 overflow-x-auto pb-1 mb-4 scrollbar-none">
+            <div className="flex gap-1.5 overflow-x-auto mb-4" style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}>
               {FILTERS.map(f => (
                 <button key={f} onClick={() => setFilter(f)}
                   className={cn("whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold transition-all shrink-0", filter === f ? "text-white shadow-sm" : "bg-white border border-slate-200 text-slate-600 hover:border-primary/40")}
