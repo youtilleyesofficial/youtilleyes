@@ -34,6 +34,9 @@ import AssignedProjects from "@/pages/user/AssignedProjects";
 import SubmitWork from "@/pages/user/SubmitWork";
 import MySubmissions from "@/pages/user/MySubmissions";
 
+// Community Page
+import Community from "@/pages/Community";
+
 // Profile Page
 import ProfilePage from "@/pages/Profile";
 
@@ -151,6 +154,9 @@ function Router() {
       <Route path="/user/wallet">
         {() => <ProtectedRoute component={WalletPage} allowedRoles={["USER"]} />}
       </Route>
+
+      {/* Community Route */}
+      <Route path="/community" component={Community} />
 
       {/* Profile Route */}
       <Route path="/profile">

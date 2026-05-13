@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
-import { Home, Briefcase, FolderOpen, LogIn, LayoutDashboard } from "lucide-react";
+import { Home, FolderOpen, LogIn, LayoutDashboard, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -18,14 +18,6 @@ export function MobileBottomNav() {
     : user?.role === "USER"
     ? "/user/dashboard"
     : null;
-
-  const liveProjectsHref = user?.role === "ADMIN"
-    ? "/admin/projects"
-    : user?.role === "USER"
-    ? "/user/projects"
-    : user?.role === "CLIENT"
-    ? "/client/projects"
-    : "/";
 
   const myProjectsHref = user?.role === "ADMIN"
     ? "/admin/projects"
@@ -45,7 +37,7 @@ export function MobileBottomNav() {
       style={{ display: "flex" }}
       className="md:!hidden fixed bottom-0 left-0 right-0 z-[9999] bg-white border-t-2 border-gray-100 h-16 items-stretch shadow-[0_-2px_10px_rgba(0,0,0,0.08)]"
     >
-      {/* Home → always landing page */}
+      {/* Home */}
       <Link href="/" style={{ flex: 1, display: "flex" }}>
         <div className={cn(
           "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
@@ -56,7 +48,7 @@ export function MobileBottomNav() {
         </div>
       </Link>
 
-      {/* Dashboard → role-specific dashboard (only when logged in) */}
+      {/* Dashboard */}
       {user && dashboardHref ? (
         <Link href={dashboardHref} style={{ flex: 1, display: "flex" }}>
           <div className={cn(
@@ -79,18 +71,21 @@ export function MobileBottomNav() {
         </Link>
       )}
 
-      {/* Live / Browse Projects */}
-      <Link href={liveProjectsHref} style={{ flex: 1, display: "flex" }}>
+      {/* Community — replaces Projects */}
+      <Link href="/community" style={{ flex: 1, display: "flex" }}>
         <div className={cn(
-          "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
-          isActive(liveProjectsHref) && liveProjectsHref !== "/" ? "text-primary" : "text-gray-400"
+          "flex flex-col items-center justify-center gap-0.5 w-full transition-colors relative",
+          isActive("/community") ? "text-primary" : "text-gray-400"
         )}>
-          <Briefcase className="h-5 w-5" />
-          <span className="text-[10px] font-semibold">Projects</span>
+          {isActive("/community") && (
+            <span className="absolute top-1.5 right-3 h-2 w-2 rounded-full animate-pulse" style={{ background: "#F58220" }} />
+          )}
+          <Users className="h-5 w-5" />
+          <span className="text-[10px] font-semibold">Community</span>
         </div>
       </Link>
 
-      {/* My Projects / Assigned */}
+      {/* My Work */}
       <Link href={myProjectsHref} style={{ flex: 1, display: "flex" }}>
         <div className={cn(
           "flex flex-col items-center justify-center gap-0.5 w-full transition-colors",
